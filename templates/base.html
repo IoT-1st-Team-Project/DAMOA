@@ -1,0 +1,52 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+    <!-- main CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+    <title>base.html</title>
+  </head>
+
+  <body>
+    <!-- 네비게이션바 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
+      <!-- 그림 Logo + Damoa -->
+      <a class="navbar-brand" href="{% url 'main:index' %}">
+        <img src="{% static 'img/damoa.png' %}" width="30" height="30" class="d-inline-block align-top" alt="Logo">
+        <!-- <img src="static/img/damoa.png" alt="Logo" style="width:40px;"> -->
+        Damoa
+      </a>
+      <!-- Toggler/collapsible 버튼 -->
+      <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- Navbar links -->
+      <div class="collapse navbar-collapse flex-grow-0" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item ">
+            <a class="nav-link" href="{% url 'common:login' %}">로그인</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- 기본 템플릿 안에 삽입될 내용 Start -->
+    {% block content %}{% endblock %}
+    <!-- 기본 템플릿 안에 삽입될 내용 End -->
+
+    <!-- jQuery JS -->
+    <script src="{% static 'jquery-3.6.3.min.js' %}"></script>
+    <!-- popper -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="{% static 'bootstrap.min.js' %}"></script>
+  </body>
+
+</html>
