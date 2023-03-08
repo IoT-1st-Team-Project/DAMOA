@@ -18,13 +18,7 @@ class Club(models.Model):
         choices = category.choices,
         null=True
     )
-    # category_choices={
-    #     ('CK','Cook'),
-    #     ('CT','Culture')
-    # }
-    # category=models.CharField(
-    #     choices=category_choices, max_length=8, null=True
-    # )
+   
     name=models.TextField('클럽이름')
 
     def __str__(self):
