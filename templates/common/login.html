@@ -55,8 +55,8 @@
             <p>모임에 참여해보세요</p>
           </div>
           <div class="mt-4 mb-3">
-            <label for="username">아이디</label>
-            <input type="text" class="form-control" name="username" id="username" value="{{ form.username.value|default_if_none:'' }}">
+            <label for="userid">아이디</label>
+            <input type="text" class="form-control" name="userid" id="userid" value="{{ form.username.value|default_if_none:'' }}">
             <span style="color: blue;">
               <a href="#">아이디를 잊으셨나요?</a>
             </span>
@@ -68,8 +68,9 @@
               <a href="#">비밀번호를 잊으셨나요?</a>
             </span>
           </div>
+
           <div class="login_button">
-            <a class="btn login_button" href="#">로그인</a>
+            <a class="btn login_button" href="{% url 'main:main' %}">로그인</a>
           </div>
         </form>
       </div>

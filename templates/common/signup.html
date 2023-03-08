@@ -90,12 +90,23 @@
                 <input type="text" class="form-control" name="age" id="age" value="{{ form.age.value|default_if_none:'' }}">
               </div>
               <div class="form-group">
-                <label for="ad">거주지</label>
-                <input type="text" class="form-control" name="ad" id="ad" value="{{ form.ad.value|default_if_none:'' }}">
+                <label for="ad">거주지</label><br>
+                <select name="ad">
+                  <option>::지역 선택::</option>
+                  <option value="Seoul">서울</option>
+                  <option value="Incheon">인천</option>
+                  <option value="Gyeonggi">경기</option>
+                  <option value="Gangwon">강원</option>
+                  <option value="Chungcheong">충청</option>
+                  <option value="Jeolla">전라</option>
+                  <option value="Gyeongsang">경상</option>
+                </select>
+                상세주소
+                <textarea type="text" class="form-control" name="ad" id="ad"></textarea>
               </div>
 
               <div class="signup_button">
-                <a class="btn signup_button" href="#">회원가입</a>
+                <a class="btn signup_button" href="{% url 'common:login' %}">회원가입</a>
               </div>
             </form>
           </div>

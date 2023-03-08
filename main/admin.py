@@ -1,10 +1,10 @@
 from django.contrib import admin
-from .models import Board
+from .models import Club
 
-class BoardAdmin(admin.ModelAdmin):
-    search_fields = ['subject']
+# class BoardAdmin(admin.ModelAdmin):
+#     search_fields = ['category']
 
-admin.site.register(Board, BoardAdmin)
+admin.site.register(Club)
 
 
 
