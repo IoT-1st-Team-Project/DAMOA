@@ -10,3 +10,10 @@ def index(request):
     """
     
     return render(request, 'main/index.html')
+
+def main(request):
+    """
+    게시글 목록 출력
+    """
+    
+    return render(request, 'main/main.html')
