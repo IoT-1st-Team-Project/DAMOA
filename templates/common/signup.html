@@ -15,9 +15,9 @@
       .signup_box {
         position: absolute;
         left: 32%;
-        bottom: 8%;
+        bottom: 5%;
         width: 600px;
-        height: 760px;
+        height: 840px;
         box-shadow: 2px 2px 12px 2px black;
       }
 
@@ -89,8 +89,9 @@
                 <label for="age">나이</label>
                 <input type="text" class="form-control" name="age" id="age" value="{{ form.age.value|default_if_none:'' }}">
               </div>
+              <!-- <div class="form-group"> <label for="gender">성별</label> <input type="radiobutton" class="form-control" name="gender" id="gender" value="{{ form.gender.value|default_if_none:'' }}"> </div> -->
               <div class="form-group">
-                <label for="ad">거주지</label><br>
+                <label for="ad">거주지</label>
                 <select name="ad">
                   <option>::지역 선택::</option>
                   <option value="Seoul">서울</option>
@@ -100,7 +101,7 @@
                   <option value="Chungcheong">충청</option>
                   <option value="Jeolla">전라</option>
                   <option value="Gyeongsang">경상</option>
-                </select>
+                </select><br>
                 상세주소
                 <textarea type="text" class="form-control" name="ad" id="ad"></textarea>
               </div>

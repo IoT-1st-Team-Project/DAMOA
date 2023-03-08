@@ -1,73 +1,59 @@
-<!DOCTYPE html>
-{%load static%}
-<html lang="ko">
+{% extends 'base.html' %}
+{% load static %}
 
-  <head>
-    <title>Bootstrap Example</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <style>
-      img {
-        width: 100px;
-        height: 100px;
-      }
-    </style>
+{% block content %}
+  <style>
+    .club {
+      width: 100px;
+      height: 100px;
+    }
+  </style>
 
-  </head>
+  <div class="container">
+    <h1>Damoa Club</h1>
 
-  <body>
+    <table class="table">
 
-    <div class="container">
-      <h2>Damoa Club</h2>
-      <p>아이콘은 ㅁ뭐..</p>
-      <table class="table">
-        <thead></thead>
-        <tbody>
-          <tr>
-            <td>
-              <a class="btn sports_button" href="#">
-                전체글보기</a>
-            </td>
-            <td>
-              <a class="btn sports_button" href="#">
-                <img src={% static 'img/gallery/sports.png' %} alt=""><br>스포츠</a>
-            </td>
-            <td>
-              <a class="btn cook_button" href="#">
-                <img src={% static 'img/gallery/cook.png' %} alt=""><br>요리</a>
-            </td>
-            <td>
-              <a class="btn culture_button" href="#">
-                <img src={% static 'img/gallery/culture.png' %} alt=""><br>문화</a>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <a class="btn outdoor_button" href="#">
-                <img src={% static 'img/gallery/outdoor.png' %} alt=""><br>아웃도어</a>
-            </td>
-            <td>
-              <a class="btn language_button" href="#">
-                <img src={% static 'img/gallery/language.png' %} alt=""><br>언어</a>
-            </td>
-            <td>
-              <a class="btn game_button" href="#">
-                <img src={% static 'img/gallery/game.png' %} alt=""><br>게임/오락</a>
-            </td>
-            <td>
-              <a class="btn music_button" href="#">
-                <img src={% static 'img/gallery/music.png' %} alt=""><br>음악/악기</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <!--카테고리-->
+      <thead></thead>
+      <tbody align="center">
+        <tr>
+          <td>
 
-  </body>
-
-</html>
+            전체 클럽보기
+          </td>
+          <td>
+            <a href="#">
+              <img class="club" src={% static 'img/gallery/sports.png' %}></a><br>스포츠
+          </td>
+          <td>
+            <a href="#">
+              <img class="club" src={% static 'img/gallery/cook.png' %}></a><br>요리
+          </td>
+          <td>
+            <a href="#">
+              <img class="club" src={% static 'img/gallery/culture.png' %}></a><br>문화
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="#">
+              <img class="club" src={% static 'img/gallery/outdoor.png' %}></a><br>아웃도어
+          </td>
+          <td>
+            <a href="#">
+              <img class="club" src={% static 'img/gallery/language.png' %}></a><br>언어
+          </td>
+          <td>
+            <a href="#">
+              <img class="club" src={% static 'img/gallery/game.png' %}></a><br>게임/오락
+          </td>
+          <td>
+            <a href="#">
+              <img class="club" src={% static 'img/gallery/music.png' %}></a><br>음악/악기
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--카테고리-->
+{% endblock %}
