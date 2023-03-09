@@ -12,16 +12,9 @@ class UserForm(UserCreationForm):
     userid = forms.CharField(max_length = 15, label="아이디")
     age = forms.IntegerField(label="나이")
     ad = forms.CharField(max_length = 50, label="거주지")
-    '''
-    GENDERS = (
-        ('M', '남성(Man)'),
-        ('W', '여성(Woman)'),
-    )
-
-    gender = models.CharField(verbose_name='성별', max_length=1, choices=GENDERS)
-    '''
+    
 
     class Meta:
         model = User
         fields = ("userid", "username", "password1", "password2", "email", "age", "ad")
-        # fields = ("userid", "username", "password1", "password2", "email", "age", "ad", "gender")
+        
