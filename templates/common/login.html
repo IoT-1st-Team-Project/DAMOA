@@ -47,10 +47,8 @@
           <a href="{% url 'main:index' %}" style="color: orange">DAMOA를 시작해보세요</a>
       </h2>
       <div class="login_box">
-          <div>
-          {% include "form_errors.html" %}
-          </div>
           <div class="container my-3">
+            {% include "form_errors.html" %}
               <form id="login_form" method="post" action="{% url 'common:login' %}">
                   {% csrf_token %}
                   
