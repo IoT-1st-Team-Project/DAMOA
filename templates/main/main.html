@@ -54,6 +54,18 @@
         </tr>
       </tbody>
     </table>
-  </div>
-  <!--카테고리-->
-{% endblock %}
+
+    {% if club_list %}
+      <ul>
+        {%for club in club_list%}
+          <li>
+            <a href="main/{{club.id}}">{{club.name}}</a>
+          </li>
+          {%endfor%}
+        </ul>
+        {%else%}
+        게시글이 없습니다.
+        {%endif%}
+        <!--카테고리-->
+      </div>
+    {% endblock %}
