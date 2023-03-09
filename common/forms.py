@@ -8,13 +8,14 @@ from django.contrib.auth.models import User
 
 class UserForm(UserCreationForm):
     # email 속성 추가
+    username = forms.CharField(max_length = 15, label="아이디")
     email = forms.EmailField(label="이메일")
-    userid = forms.CharField(max_length = 15, label="아이디")
+    name = forms.CharField(max_length = 15, label="성명")
     age = forms.IntegerField(label="나이")
     ad = forms.CharField(max_length = 50, label="거주지")
     
 
     class Meta:
         model = User
-        fields = ("userid", "username", "password1", "password2", "email", "age", "ad")
+        fields = ("username", "name", "password1", "password2", "email", "age", "ad")
         
