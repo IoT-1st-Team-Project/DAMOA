@@ -15,8 +15,8 @@ def signup(request):
             userid = form.cleaned_data.get('userid')  # 회원가입 화면에서 입력한 값을 얻어와
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=userid, password=raw_password) # 사용자 인증
-            login(request, user)  # 회원가입되면 자동 로그인
-            return redirect('index')
+            # 자동로그인 삭제 (오류남)
+            return redirect('common:login')
     else:
         form = UserForm()
     return render(request, 'common/signup.html', {'form': form})

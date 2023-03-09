@@ -19,5 +19,12 @@ def main(request):
     
     return render(request, 'main/main.html')
 
+def login(request):
+    """
+    로그인 화면 출력
+    """
+    
+    return render(request, 'common/login.html')
+
 # def Clublist(request):
     

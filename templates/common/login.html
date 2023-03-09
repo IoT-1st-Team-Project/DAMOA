@@ -75,7 +75,7 @@
                       </span>
                   </div>
                   
-                  <button class="login_button" id="my-button">로그인</button>
+                  <button class="login_button" id="login-button">로그인</button>
   
               </form>
           </div>
@@ -96,7 +96,7 @@
 </html>
 
 <script>
-  document.getElementById("my-button").addEventListener("click", function() {
+  document.getElementById("login-button").addEventListener("click", function() {
     location.href = "{% url 'main:main' %}";
   });
 </script>

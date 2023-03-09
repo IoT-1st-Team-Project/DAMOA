@@ -8,5 +8,6 @@ urlpatterns = [
     path("", include('main.urls')),  # / 페이지에 해당하는 urlpatterns 
     path('common/', include('common.urls')),
     path('main/', views.main, name='main'), # main/ 페이지에 해당하는 urlpatterns
+    path('login/', views.main, name='login'),
 ]
 
