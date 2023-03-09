@@ -24,7 +24,7 @@ def login(request):
     로그인 화면 출력
     """
     
-    return render(request, 'common/login.html')
+    return render(request, 'templates/common/login.html')
 
 # def Clublist(request):
     
