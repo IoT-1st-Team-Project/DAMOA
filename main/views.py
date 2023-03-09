@@ -33,3 +33,11 @@ def detail(request, board_id):
     board=get_object_or_404(Board, pk=board_id)
     context={'board':board}
     return render(request, 'main/board_datail.html',context)
+
+
+def login(request):
+    """
+    로그인 화면 출력
+    """
+    
+    return render(request, 'templates/common/login.html')   

@@ -9,33 +9,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
     <style>
       .login_box {
         position: absolute;
-        left: 36%;
+        left: 34%;
         bottom: 24%;
         width: 500px;
-        height: 460px;
+        height: 400px;
         box-shadow: 2px 2px 12px 2px black;
+        overflow:auto;
       }
   
       .start_damoa {
         position: absolute;
-        left: 36%;
-        top: 8%;
+        left: 34%;
+        top: 14%;
       }
   
       .login_button {
-        position: fixed;
-        bottom: 30%;
-        left: 38.8%;
+        position: relative;
+        top: 30px;
+        left: 18%;
         color: rgb(255, 255, 255);
         background-color: rgb(59, 130, 254);
         border-color: rgb(59, 130, 254);
         border-radius: 1em;
         font-size: 18px;
         font-weight: bolder;
-        width: 400px;
+        width: 300px;
         height: 40px;
       }
     </style>
@@ -44,11 +46,9 @@
       <h2 class="start_damoa">
           <a href="{% url 'main:index' %}" style="color: orange">DAMOA를 시작해보세요</a>
       </h2>
-      <div style="width: 200px; height: 200px;">
-      {% include "form_errors.html" %}
-      </div>
       <div class="login_box">
           <div class="container my-3">
+            {% include "form_errors.html" %}
               <form id="login_form" method="post" action="{% url 'common:login' %}">
                   {% csrf_token %}
                   
@@ -73,10 +73,11 @@
                       <span style="color: blue;">
                           <a href="#">비밀번호를 잊으셨나요?</a>
                       </span>
+                      <div>
+                      <button form="login_form" class="login_button mb-4" id="login-button">로그인</button> 
+                      </div>
                   </div>
                   
-                  <button class="login_button" id="my-button">로그인</button>
-  
               </form>
           </div>
       </div>
@@ -95,8 +96,11 @@
 
 </html>
 
+<!--
 <script>
-  document.getElementById("my-button").addEventListener("click", function() {
+  document.getElementById("login-button").addEventListener("click", function() {
     location.href = "{% url 'main:main' %}";
   });
 </script>
+-->
+
