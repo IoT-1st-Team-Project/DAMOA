@@ -21,9 +21,8 @@
         background-size: cover;
       }
 
-      .login_button {
+      .btn {
         position: fixed;
-        bottom: 160px;
         left: 42%;
         color: black;
         background: gold;
@@ -35,18 +34,13 @@
         height: 40px;
       }
 
+      .login_button {
+        bottom: 160px;
+
+      }
+
       .sign_button {
-        position: fixed;
         bottom: 100px;
-        left: 42%;
-        color: black;
-        background: gold;
-        border-color: gold;
-        border-radius: 1em;
-        font-size: 20px;
-        font-weight: bolder;
-        width: 220px;
-        height: 40px;
       }
     </style>
   </head>
@@ -55,7 +49,8 @@
 
     <div align="center">
       <div class="mt-5">
-        <img src={% static 'img/damoa.png' %} width="380" alt="Damoa Logo">
+        <a href="{% url 'main:index' %}">
+          <img src={% static 'img/damoa.png' %} width="380" alt="Damoa Logo"></a>
       </div>
       <div class="login_button">
         <a class="btn login_button" href="{% url 'common:login' %}">로그인</a>
