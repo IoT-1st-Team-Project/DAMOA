@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <h1>{{board.subject}}</h1>
+  <div>
+    {{board.content}}
+  </div>
+  <form action="{%url 'main:reply_create' board.id %}"></form>
+  {%endblock%}
