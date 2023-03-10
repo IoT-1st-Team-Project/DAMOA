@@ -1,8 +1,17 @@
 from django.forms import ModelForm
-from models import *
+from django import forms
+from main.models import Board
 
-class ClubForm(ModelForm):
+class BoardForm(forms.ModelForm):
     class Meta:
-        model = Club
-        fields = []
+        model = Board
+        fields = ['subject','content']
 
+    widgets={
+        'subject':forms.TextInput(attrs={'class':'form-control'}),
+        'content':forms.Textarea(attrs={'class':'form-control', 'rows':10}),
+    }
+    labels={
+        'subject':'제목',
+        'content':'내용',
+    }

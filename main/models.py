@@ -35,7 +35,7 @@ class Board(models.Model):
         return self.subject
 
 
-# # 댓글 모델
+# 댓글 모델
 class Reply(models.Model):
     board = models.ForeignKey(Board, on_delete=models.CASCADE)
     content = models.TextField()

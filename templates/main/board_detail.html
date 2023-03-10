@@ -1,10 +1,22 @@
 {% extends 'base.html' %}
 {% load static %}
-
+<link rel="stylesheet" type="text/css" href="{%static 'style.css %}">
 {% block content %}
   <h1>{{board.subject}}</h1>
   <div>
-    {{board.content}}
+    {{board.club}}
   </div>
-  <form action="{%url 'main:reply_create' board.id %}"></form>
-  {%endblock%}
+  <h5>{{board.reply_set.count}}개의 댓글이 있습니다.</h5>
+  <div>
+    <ul>
+      {%for reply in board.reply_set.all %}
+        <li>{{reply.count}}</li>
+        {%endfor%}
+      </ul>
+    </div>
+    <form action="{%url 'main:reply_create' board.id %}" method="post">
+      {%csrf_token%}
+      <textarea name="content" id="content" rows="10"></textarea>
+      <input type="submit" vlaue="모임등록">
+    </form>
+    {%endblock%}
