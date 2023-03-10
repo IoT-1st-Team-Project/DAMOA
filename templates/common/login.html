@@ -48,7 +48,7 @@
             <div class="form-group">
               <label for="username">아이디</label>
               <input type="text" class="form-control" name="username" id="username" value="{{ form.username.value|default_if_none:'' }}">
-              <span style="color: blue;">
+              <span style="color: blue;" class="logout_message_required">
                 <a href="#">아이디를 잊으셨나요?</a>
               </span>
             </div>

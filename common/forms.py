@@ -14,7 +14,6 @@ class UserForm(UserCreationForm):
     age = forms.IntegerField(label="나이")
     ad = forms.CharField(max_length = 50, label="거주지")
     
-
     class Meta:
         model = User
         fields = ("username", "name", "password1", "password2", "email", "age", "ad")
