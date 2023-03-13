@@ -14,8 +14,8 @@
 
     <title>Damoa 시작 화면</title>
     <style>
-      body {
-        background-image: url({% static 'img/mainbg.png' %});
+      .body {
+        background-image:url(/static/img/mainbg.png);
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: cover;
@@ -45,12 +45,12 @@
     </style>
   </head>
 
-  <body>
-
-    <div align="center">
+  <body class="body">
+    <div style = 'text-align: center;'>
       <div class="mt-5">
-        <a href="{% url 'main:index' %}">
-          <img src={% static 'img/damoa.png' %} width="380" alt="Damoa Logo"></a>
+        <a href="{% url 'main:main' %}">
+          <img src="{% static 'img/damoa.png' %}" alt="Damoa Logo" width="380px;">
+        </a>
       </div>
       <div class="login_button">
         <a class="btn login_button" href="{% url 'common:login' %}">로그인</a>
@@ -65,7 +65,6 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <!-- Bootstrap JS -->
     <script src="{% static 'bootstrap.min.js' %}"></script>
-
   </body>
 
 </html>
