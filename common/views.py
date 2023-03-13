@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 
-from .forms import UserForm
+from .forms import CustomUserForm
 
 
 def signup(request):
@@ -9,7 +9,7 @@ def signup(request):
     회원가입
     """
     if request.method == "POST":
-        form = UserForm(request.POST)  # 새로운 사용자 생성
+        form = CustomUserForm(request.POST)  # 새로운 사용자 생성
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')  # 회원가입 화면에서 입력한 값을 얻어와
@@ -18,5 +18,5 @@ def signup(request):
             # 자동로그인 삭제 (오류남)
             return redirect('common:login')
     else:
-        form = UserForm()
+        form = CustomUserForm()
     return render(request, 'common/signup.html', {'form': form})
