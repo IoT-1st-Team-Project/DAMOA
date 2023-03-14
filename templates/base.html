@@ -21,10 +21,17 @@
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark border-bottom">
       <div class="container-fluid">
         <!-- 그림 Logo + Damoa -->
-        <a class="navbar-brand" href="{% url 'main:index' %}">
-          <img src="{% static 'img/damoa logo.png' %}" width="50px" height="50px" class="d-inline-block align-top" alt="Logo">
-          Damoa
-        </a>
+        {% if user.is_authenticated %}
+          <a class="navbar-brand" href="{% url 'main:main' %}">
+            <img src="{% static 'img/damoa logo.png' %}" width="50px" height="50px" class="d-inline-block align-top" alt="Logo">
+            Damoa
+          </a>
+        {% else %}
+          <a class="navbar-brand" href="{% url 'main:index' %}">
+            <img src="{% static 'img/damoa logo.png' %}" width="50px" height="50px" class="d-inline-block align-top" alt="Logo">
+            Damoa
+          </a>
+        {% endif %}
 
         <!-- Toggler/collapsible 버튼 화면 크기 줄어들었을 때 로그인/로그아웃을 햄버거 버튼에 숨겨 -->
         <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
