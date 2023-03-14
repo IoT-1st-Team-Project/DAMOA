@@ -2,7 +2,7 @@ from .models import Club, Board
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.utils import timezone
-from .forms import BoardForm
+from .forms import BoardForm, ClubForm
 
 def index(request):
     """
@@ -77,3 +77,18 @@ def board_create(request):
         form=BoardForm()
             
     return render(request, 'main/board_form.html', {'form':form})
+
+def club_create(request):
+    '''
+    클럽등록
+    '''
+    if request.method=='POST':
+        form=ClubForm(request.POST)
+        if form.is_valid():
+            club=form.save(commit=False)
+            club.save()
+            return redirect('main:main')
+    else:
+        form=ClubForm()
+    return render(request, 'main/club_form.html', {'form':form})
+    
