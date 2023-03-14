@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load main_filter %}
 
 {% block content %}
   <style>
@@ -23,31 +24,84 @@
           <th>클럽명</th>
           <th style="width:35%">제목</th>
           <th>작성자</th>
-          <th>작성일</th>
           <th>참석자 수</th>
+          <th>작성일</th>
         </tr>
       </thead>
+
       <tbody>
         {% if board_list %}
-          {%for board in board_list%}
+          {% for board in board_list %}
             <tr class="text-center">
-              <td>{{forloop.counter}}</td>
-              <td>{{ club.name }}</td>
+              <td>{{ board_list.paginator.count|sub:board_list.start_index|sub:forloop.counter0|add:1 }}</td>
+              <td>{{ board.club }}</td>
               <td class="text-left">
                 <a href="{%url 'main:detail' board.id%}">{{board.subject}}</a>
               </td>
               <td></td>
-              <td>{{board.create_date}}</td>
               <td></td>
+              <td>{{board.create_date}}</td>
             </tr>
-            {%endfor%}
-            {%else%}
-            게시글이 없습니다.
-            {%endif%}
 
-          </tbody>
-        </table>
-        <a href="{%url 'main:board_create' %}" class="btn btn-warning">게시글 등록하기</a>
-      </div>
+          {% endfor %}
+        {% else %}
+          게시글이 없습니다.
+        {% endif %}
+      </tbody>
+    </table>
 
-      {%endblock%}
+    <!-- 페이징 처리 시작 -->
+    <ul class="pagination justify-content-center">
+      <!-- 이전 페이지 -->
+      {% if board_list.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ board_list.previous_page_number }}">
+            <i class="fa-solid fa-backward"></i>
+          </a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <a class="page-link" tabindex="-1" aria-disabled="true" href="#">
+            <i class="fa-solid fa-backward"></i>
+          </a>
+        </li>
+      {% endif %}
+
+      <!-- 페이지 리스트 -->
+      {% for page_number in board_list.paginator.page_range %}
+        <!-- 페이지 표시 제한 기능 구현 X 저장하면 자꾸 바뀌어 settings.json 만들어야되나 -->
+        {% if page_number == board_list.number %}
+          <li class="page-item active" aria-current="page">
+            <a class="page-link" href="?page={{ page_number }}">
+              {{ page_number }}
+            </a>
+          </li>
+        {% else %}
+          <li class="" page-item="page-item">
+            <a class="page-link" href="?page={{ page_number }}">
+              {{ page_number }}
+            </a>
+          </li>
+        {% endif %}
+      {% endfor %}
+
+      <!-- 다음 페이지 -->
+      {% if board_list.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ board_list.next_page_number }}">
+            <i class="fa-solid fa-forward"></i>
+          </a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <a class="page-link" tabindex="-1" aria-disabled="true" href="#">
+            <i class="fa-solid fa-forward"></i>
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+
+    <a href="{%url 'main:board_create' %}" class="btn btn-warning">게시글 등록하기</a>
+  </div>
+
+{% endblock %}

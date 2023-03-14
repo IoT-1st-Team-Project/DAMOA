@@ -4,12 +4,12 @@ from django.core.paginator import Paginator
 from django.utils import timezone
 from .forms import BoardForm
 
-# Create your views here.
 def index(request):
     """
     첫 화면 출력
     """
     return render(request, 'main/index.html')
+
 
 def main(request):
     """
@@ -25,8 +25,17 @@ def board_list(request):
     board 출력
     '''
     board_list=Board.objects.order_by('-id')
-    context={'board_list':board_list}
-    return render(request, 'main/board_list.html',context)
+
+    # 입력 인자
+    page = request.GET.get('page', '1')  # 페이지
+    board_list = Board.objects.order_by('-create_date')
+    paginator = Paginator(board_list, 5)  # 페이지당 5개 테스트
+    page_obj = paginator.get_page(page)
+    context = {'board_list':page_obj}
+
+    return render(request, 'main/board_list.html', context)
+
+
 
 def detail(request, board_id):
     '''
