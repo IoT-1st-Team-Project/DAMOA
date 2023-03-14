@@ -33,7 +33,7 @@
           {%for board in board_list%}
             <tr class="text-center">
               <td>{{forloop.counter}}</td>
-              <td>{{ club.name }}</td>
+              <td>{{board.club }}</td>
               <td class="text-left">
                 <a href="{%url 'main:detail' board.id%}">{{board.subject}}</a>
               </td>
