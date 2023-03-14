@@ -1,5 +1,5 @@
 from django import forms
-from main.models import Board, Reply
+from main.models import Board, Club
 
 class BoardForm(forms.ModelForm):
     class Meta:
@@ -10,14 +10,13 @@ class BoardForm(forms.ModelForm):
             'subject':'제목',
             'content':'내용',
         }
-
-
-
-class AnswerForm(forms.ModelForm):
+class ClubForm(forms.ModelForm):
     class Meta:
-        model = Board
-        fields = ['subject','content']
+        model = Club
+        fields = ['category','name']
         labels={
-            'subject':'제목',
-            'content':'내용',
+            'category':'카테고리',
+            'name':'이름',
         }
+
+      
