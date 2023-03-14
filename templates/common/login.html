@@ -12,9 +12,9 @@
 
     <style>
       .login_box {
-        position: relative;
+        position: absolute;
         left: 34%;
-        margin-top: 100px;
+        bottom: 24%;
         width: 500px;
         height: 560px;
         box-shadow: 2px 2px 12px 2px black;
@@ -48,7 +48,7 @@
             <div class="form-group">
               <label for="username">아이디</label>
               <input type="text" class="form-control" name="username" id="username" value="{{ form.username.value|default_if_none:'' }}">
-              <span style="color: blue;">
+              <span style="color: blue;" class="logout_message_required">
                 <a href="#">아이디를 잊으셨나요?</a>
               </span>
             </div>
