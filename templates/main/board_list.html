@@ -20,8 +20,11 @@
       <thead>
         <tr class="thead-dark">
           <th>번호</th>
+          <th>클럽명</th>
           <th>제목</th>
+          <th>작성자</th>
           <th>모임일</th>
+          <th>참석자</th>
         </tr>
       </thead>
       <tbody>
@@ -41,7 +44,7 @@
 
           </tbody>
         </table>
-
+        <a href="{%url 'main:board_create' %}" class="btn btn-warning">게시글 등록하기</a>
       </div>
 
       {%endblock%}
