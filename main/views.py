@@ -32,7 +32,7 @@ def detail(request, board_id):
     '''
     board=get_object_or_404(Board, pk=board_id)
     context={'board':board}
-    return render(request, 'main/board_datail.html',context)
+    return render(request, 'main/board_detail.html',context)
 
 
 def login(request):
