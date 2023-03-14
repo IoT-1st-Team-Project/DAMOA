@@ -1,9 +1,25 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block content %}
 
-  {% if board_list %}
+
+{% block content %}
+<style>
+  .board_box{
+    position: absolute;
+    left: 50%;
+    top: 55%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 98%;
+    height: 87%;
+    box-shadow: 1px 1px 10px 1px black;
+  }
+
+</style>
+
+  <div class="board_box">
+    {% if board_list %}
     <ul>
       {%for board in board_list%}
         <li>
@@ -11,8 +27,12 @@
         </li>
         {%endfor%}
       </ul>
-      {%else%}
+  {%else%}
       게시글이 없습니다.
-      {%endif%}
+  {%endif%}
 
-      {%endblock%}
+
+  </div>
+
+  
+{%endblock%}
