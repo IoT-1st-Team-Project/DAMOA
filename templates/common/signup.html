@@ -13,11 +13,12 @@
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
     <style>
       .signup_box {
-        position: relative;
-        left: 32%;
-        margin-top: 26px;
-        width: 600px;
-        height: 700px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 40%;
+        height: 90%;
         box-shadow: 2px 2px 12px 2px black;
         overflow: scroll;
       }
@@ -113,12 +114,15 @@
             </form>
           </div>
         </div>
+      </div>
+    </div>
 
-        <!-- jQuery JS -->
-        <script src="{% static 'jquery-3.6.3.min.js' %}"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-        <!-- Bootstrap JS -->
-        <script src="{% static 'bootstrap.min.js' %}"></script>
-      </body>
+    <!-- jQuery JS -->
+    <script src="{% static 'jquery-3.6.3.min.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="{% static 'bootstrap.min.js' %}"></script>
 
-    </html>
+  </body>
+
+</html>
