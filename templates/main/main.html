@@ -39,10 +39,10 @@
     <table class="table">
       <thead></thead>
       <tbody style="text-align: center;">
-        <tr>
-          <td>
-            <a class="club-link" href="{% url 'main:board_list'%}">전체글 보기</a>
-          </td>
+          <tr>
+            <td>
+              <a class="club-link" href="{% url 'main:board_list'%}">전체글 보기</a>
+            </td>
 
           <td>
             <a href="#" style="display: block;">
@@ -98,7 +98,7 @@
     </table>
 
     <div>
-
+      <a href="{%url 'main:club_create' %}" class="btn btn-warning">클럽 만들기</a>
       <div class="container">
         <table class="table">
           <thead>
@@ -113,7 +113,7 @@
                 <tr>
                   <td>{{forloop.counter}}</td>
                   <td>
-                    <a href="main/{{club.id}}">{{club.name}}</a>
+                    <a href="#">{{club.name}}</a>
                   </td>
                 </tr>
 
@@ -128,50 +128,62 @@
           </div>
         </div>
 
-        <hr style="color: black; size: 3px;">
-        <!--카테고리-->
+              <hr style="color: black; size: 3px;">
+              <!--카테고리-->
 
-        <table class="table" style="text-align: center;">
-          <td>
-            <div>
-              <div class="icon-box">
-                <h4>최신 클럽<br>
+            <table class="table" style="text-align: center;">
+              <td>
+                  <div>
+                    <div class="icon-box">
+                      <h4>최신 클럽<br>
+
+                  
 
                   <a href="" style="display: block;">
+                    
                     <img src="{% static 'img/pet.png' %}"></a>
 
-                </h4>
-                <p></p>
-                <p>모여모여!<br>가장 최신 클럽을 가입해 보세요</p>
-              </div>
-            </div>
-          </td>
+                
 
-          <td>
-            <div>
-              <div class="icon-box">
-                <h4>인기 클럽<br>
+                </h4>
+                      <p></p>
+                      <p>모여모여!<br>가장 최신 클럽을 가입해 보세요</p>
+                    </div>
+                  </div>
+              </td>
+
+              <td>
+                  <div>
+                    <div class="icon-box">
+                      <h4>인기 클럽<br>
+                  
                   <a href="" style="display: block;">
+                    
                     <img src="{% static 'img/pet.png' %}"></a>
 
-                </h4>
-                <p></p>
-                <p>인기폭발!<br>가장 인기있는 클럽에 가입해 보세요</p>
-              </div>
-            </div>
-          </td>
+                
 
-          <td>
-            <div>
-              <div class="icon-box">
-                <h4>추천 클럽<br>
+                </h4>
+                      <p></p>
+                      <p>인기폭발!<br>가장 인기있는 클럽에 가입해 보세요</p>
+                    </div>
+                  </div>
+              </td>
+
+              <td>
+                  <div>
+                    <div class="icon-box">
+                      <h4>추천 클럽<br>
+                  
                   <a href="" style="display: block;">
+                    
                     <img src="{% static 'img/pet.png' %}"></a>
+                
                 </h4>
-                <p></p>
-                <p>강력추천!<br>다모아가 추천하는 클럽에 가입해 보세요</p>
-              </div>
-            </div>
-          </td>
-        </table>
-      {% endblock %}
+                      <p></p>
+                      <p>강력추천!<br>다모아가 추천하는 클럽에 가입해 보세요</p>
+                    </div>
+                  </div>
+              </td>
+            </table>
+            {% endblock %}
