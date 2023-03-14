@@ -2,16 +2,16 @@
 {% load static %}
 
 <style>
-  .table{
+  .table {
     width: 1400px;
-    height : 600px;
+    height: 600px;
   }
-  
-  .row{
+
+  .row {
     width: 1600px;
   }
 
-  .icon-box{
+  .icon-box {
     width: 400px;
     height: 280px;
     box-shadow: 2px 2px 12px 2px black;
@@ -21,129 +21,157 @@
     text-align: center;
   }
 
-  .img{
+  .img {
     display: block;
     margin: auto;
-    height: 120px;
+    height: 100px;
   }
 
-  .description{
+  .description {
     text-align: center;
   }
-
 </style>
 
 {% block content %}
   <div class="container">
     <h1>Damoa Club</h1>
-    
+
     <table class="table">
       <thead></thead>
       <tbody style="text-align: center;">
-      <tr>
-        <td>
-          <a class="club-link" href="{% url 'main:board_list'%}">전체글 보기</a>
-        </td>
+        <tr>
+          <td>
+            <a class="club-link" href="{% url 'main:board_list'%}">전체글 보기</a>
+          </td>
 
-        <td>
-          <a href="#" style="display: block;">
-            <img src="{% static 'img/gallery/sports.png' %}" style="width: 180px; height: auto;">
-          </a>
-          <br>스포츠
-        </td>
-        
-        <td>
-          <a href="#" style="display: block;">
-            <img class="club" src="{% static 'img/gallery/cook.png' %}" style="width: 180px; height: auto;">
-          </a>
-          <br>요리
-        </td>
-        
-        <td>
-          <a href="#" style="display: block;">
-            <img class="club" src="{% static 'img/gallery/culture.png' %}" style="width: 180px; height: auto;">
-          </a>
-          <br>문화
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <a href="#" style="display: block;">
-            <img class="club" src="{% static 'img/gallery/outdoor.png' %}" style="width: 180px; height: auto;">
-          </a>
-          <br>아웃도어
-        </td>
-        
-        <td>
-          <a href="#" style="display: block;">
-            <img class="club" src="{% static 'img/gallery/language.png' %}" style="width: 180px; height: auto;">
-          </a>
-          <br>언어
-        </td>
-        
-        <td>
-          <a href="#" style="display: block;">
-            <img class="club" src="{% static 'img/gallery/game.png' %}" style="width: 180px; height: auto;">
-          </a>
-          <br>게임/오락
-        </td>
-        
-        <td>
-          <a href="#" style="display: block;">
-            <img class="club" src="{% static 'img/gallery/music.png' %}" style="width: 180px; height: auto;">
-          </a>
-          <br>음악/악기
-        </td>
-      </tr>
+          <td>
+            <a href="#" style="display: block;">
+              <img src="{% static 'img/gallery/sports.png' %}" style="width: 180px; height: auto;">
+            </a>
+            <br>스포츠
+          </td>
+
+          <td>
+            <a href="#" style="display: block;">
+              <img class="club" src="{% static 'img/gallery/cook.png' %}" style="width: 180px; height: auto;">
+            </a>
+            <br>요리
+          </td>
+
+          <td>
+            <a href="#" style="display: block;">
+              <img class="club" src="{% static 'img/gallery/culture.png' %}" style="width: 180px; height: auto;">
+            </a>
+            <br>문화
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="#" style="display: block;">
+              <img class="club" src="{% static 'img/gallery/outdoor.png' %}" style="width: 180px; height: auto;">
+            </a>
+            <br>아웃도어
+          </td>
+
+          <td>
+            <a href="#" style="display: block;">
+              <img class="club" src="{% static 'img/gallery/language.png' %}" style="width: 180px; height: auto;">
+            </a>
+            <br>언어
+          </td>
+
+          <td>
+            <a href="#" style="display: block;">
+              <img class="club" src="{% static 'img/gallery/game.png' %}" style="width: 180px; height: auto;">
+            </a>
+            <br>게임/오락
+          </td>
+
+          <td>
+            <a href="#" style="display: block;">
+              <img class="club" src="{% static 'img/gallery/music.png' %}" style="width: 180px; height: auto;">
+            </a>
+            <br>음악/악기
+          </td>
+        </tr>
       </tbody>
     </table>
-  
-  <div>
-  {% if club_list %}
-    <ul>
-      {%for club in club_list%}
-        <li>
-          <a href="main/{{club.id}}">{{club.name}}</a>
-        </li>
-      {%endfor%}
-    </ul>
-  {%else%}
-    게시글이 없습니다.
-  {%endif%}
-  </div>
 
-  <hr style="color: black; size: 3px;">
-  <!--카테고리-->
+    <div>
 
-    <table class="table" style="text-align: center;">
-      <td>
-      <div>
-        <div class="icon-box">
-          <h4>최신 클럽<br><a href="" style="display: block;"><img src="{% static 'img/pet.png' %}"></a></h4>
-          <p></p>
-          <p>모여모여!<br>가장 최신 클럽을 가입해 보세요</p>
+      <div class="container">
+        <table class="table">
+          <thead>
+            <tr class="thead-blue">
+              <th>번호</th>
+              <th>클럽명</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if club_list %}
+              {%for club in club_list%}
+                <tr>
+                  <td>{{forloop.counter}}</td>
+                  <td>
+                    <a href="main/{{club.id}}">{{club.name}}</a>
+                  </td>
+                </tr>
+
+                {%endfor%}
+                {%else%}
+                <tr>
+                  게시글이 없습니다.
+                </tr>
+                {%endif%}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
-      </td>
 
-      <td>
-      <div>
-        <div class="icon-box">
-          <h4>인기 클럽<br><a href="" style="display: block;"><img src="{% static 'img/pet.png' %}"></a></h4>
-          <p></p>
-          <p>인기폭발!<br>가장 인기있는 클럽에 가입해 보세요</p>
-        </div>
-      </div>
-      </td>
+        <hr style="color: black; size: 3px;">
+        <!--카테고리-->
 
-      <td>
-      <div>
-        <div class="icon-box">
-          <h4>추천 클럽<br><a href="" style="display: block;"><img src="{% static 'img/pet.png' %}"></a></h4>
-          <p></p>
-          <p>강력추천!<br>다모아가 추천하는 클럽에 가입해 보세요</p>
-        </div>
-      </div>
-      </td>
-    </table>
-{% endblock %}
+        <table class="table" style="text-align: center;">
+          <td>
+            <div>
+              <div class="icon-box">
+                <h4>최신 클럽<br>
+
+                  <a href="" style="display: block;">
+                    <img src="{% static 'img/pet.png' %}"></a>
+
+                </h4>
+                <p></p>
+                <p>모여모여!<br>가장 최신 클럽을 가입해 보세요</p>
+              </div>
+            </div>
+          </td>
+
+          <td>
+            <div>
+              <div class="icon-box">
+                <h4>인기 클럽<br>
+                  <a href="" style="display: block;">
+                    <img src="{% static 'img/pet.png' %}"></a>
+
+                </h4>
+                <p></p>
+                <p>인기폭발!<br>가장 인기있는 클럽에 가입해 보세요</p>
+              </div>
+            </div>
+          </td>
+
+          <td>
+            <div>
+              <div class="icon-box">
+                <h4>추천 클럽<br>
+                  <a href="" style="display: block;">
+                    <img src="{% static 'img/pet.png' %}"></a>
+                </h4>
+                <p></p>
+                <p>강력추천!<br>다모아가 추천하는 클럽에 가입해 보세요</p>
+              </div>
+            </div>
+          </td>
+        </table>
+      {% endblock %}
