@@ -16,26 +16,29 @@
   </style>
 
   <div class="container my-3">
-    <table class="table">
+    <table class="table ">
       <thead>
-        <tr class="thead-dark">
+        <tr class="text-center thead-dark">
           <th>번호</th>
           <th>클럽명</th>
-          <th>제목</th>
+          <th style="width:35%">제목</th>
           <th>작성자</th>
-          <th>모임일</th>
-          <th>참석자</th>
+          <th>작성일</th>
+          <th>참석자 수</th>
         </tr>
       </thead>
       <tbody>
         {% if board_list %}
           {%for board in board_list%}
-            <tr>
+            <tr class="text-center">
               <td>{{forloop.counter}}</td>
-              <td>
+              <td>{{ club.name }}</td>
+              <td class="text-left">
                 <a href="{%url 'main:detail' board.id%}">{{board.subject}}</a>
               </td>
-              <td>{{question.create_date}}</td>
+              <td></td>
+              <td>{{board.create_date}}</td>
+              <td></td>
             </tr>
             {%endfor%}
             {%else%}
