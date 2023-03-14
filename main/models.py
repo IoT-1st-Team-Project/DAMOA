@@ -45,3 +45,9 @@ class Reply(models.Model):
 
     def __str__(self):
         return self.content
+
+# 클럽 내부 게시글 모델
+class ClubPost(models.Model) :
+    board = models.ForeignKey(Board, on_delete=models.CASCADE)
+    content = models.TextField()
+    create_date = models.DateTimeField('생성일')
