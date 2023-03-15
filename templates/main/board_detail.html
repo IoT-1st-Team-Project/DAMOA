@@ -23,14 +23,17 @@
       <div class="bg-light  text-center p-3 border font-weight-bolder mb-1">{{board.voter.count}}</div>
       <a href="#" data-uri="{%url 'main:vote_board' board.id %}" class="recommend btn btn-sm btn-outline-danger btn-block my-1">참석</a>
     </div>
-
-    {%if vote_board %}
-      {%for voter in vote_board %}
-        <h2>참석자:{{board.voter}}</h2>
-      {% endfor %}
-    {% else %}
-      참석자가 없습니다.
-    {% endif %}
+    <div class="card-body">
+      <p class="card-text">{{ board.content }}</p>
+      <hr>
+      <p class="card-text">참석자:
+        {% for voter in board.voter.all %}
+          {{ voter.name }}
+          {% empty %}
+          참석한 사람이 아직 없습니다.
+        {% endfor %}
+      </p>
+    </div>
 
     <div class="card my-3">
       <div class="card-body">
