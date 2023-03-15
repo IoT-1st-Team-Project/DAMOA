@@ -47,7 +47,7 @@ def board_list(request):
     # 입력 인자
     page = request.GET.get('page', '1')  # 페이지
     board_list = Board.objects.order_by('-create_date')
-    paginator = Paginator(board_list, 5)  # 페이지당 5개 테스트
+    paginator = Paginator(board_list, 10)  # 페이지당 5개 테스트
     page_obj = paginator.get_page(page)
     context = {'board_list':page_obj}
 
@@ -94,6 +94,8 @@ def board_modify(request, board_id):
         form = BoardForm(instance=board)  # 기존 내용이 반영된 상태에서 수정 시작
     context = {'form': form}
     return render(request, 'main/board_form.html', context)
+
+
 
 @login_required(login_url = 'common:login')
 def board_delete(request, board_id):
