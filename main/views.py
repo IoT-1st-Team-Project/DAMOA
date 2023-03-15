@@ -53,7 +53,7 @@ def board_list(request):
 
     return render(request, 'main/board_list.html', context)
 
-
+@login_required(login_url = 'common:login')
 def board_create(request):
     '''
     게시글등록
@@ -62,6 +62,7 @@ def board_create(request):
         form=BoardForm(request.POST)
         if form.is_valid():
             board=form.save(commit=False)
+            board.author=request.user
             board.create_date = timezone.now()
             board.save()
             return redirect('main:board_list')
@@ -108,7 +109,7 @@ def board_delete(request, board_id):
     board.delete()
     return redirect('main:index')
 
-
+@login_required(login_url = 'common:login')
 def reply_create(request, board_id):
     '''
     댓글등록
@@ -118,6 +119,7 @@ def reply_create(request, board_id):
         form=ReplyForm(request.POST)
         if form.is_valid():
             reply=form.save(commit=False)
+            reply.author=request.user
             reply.create_date=timezone.now()
             reply.board=board
             reply.save()
