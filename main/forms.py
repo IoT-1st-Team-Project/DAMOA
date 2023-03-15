@@ -10,6 +10,7 @@ class BoardForm(forms.ModelForm):
             'subject':'제목',
             'content':'내용',
         }
+        
 class ClubForm(forms.ModelForm):
     class Meta:
         model = Club

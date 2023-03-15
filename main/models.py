@@ -1,5 +1,6 @@
 from django.db import models
 # from django.contrib.auth.models import User
+from django.conf import settings
 
 class Club(models.Model):
     class category(models.TextChoices):
@@ -25,22 +26,23 @@ class Club(models.Model):
 # 게시글 모델
 class Board(models.Model):
     club = models.ForeignKey(Club, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     subject = models.CharField('제목', max_length = 200,
                                help_text='게시글의 제목을 한 줄로 작성하세요.')
     content = models.TextField('내용', help_text='내용을 상세히 작성하세요.')
     create_date = models.DateTimeField('생성일')
-    # modify_date = models.DateTimeField(null=True, blank=True)
+    modify_date = models.DateTimeField(null=True, blank=True)
     # like = models.ManyToManyField(User, related_name='reply_like')
     def __str__(self):
         return self.subject
 
 
-# # 댓글 모델
+# 댓글 모델
 class Reply(models.Model):
     board = models.ForeignKey(Board, on_delete=models.CASCADE)
     content = models.TextField()
     create_date = models.DateTimeField('생성일')
-    # modify_date = models.DateTimeField(null=True, blank=True)
+    modify_date = models.DateTimeField(null=True, blank=True)
     # like = models.ManyToManyField(User, related_name='reply_like')
 
     def __str__(self):
