@@ -6,10 +6,12 @@
     <h2 class="border-bottom py-2">
       <h1>{{board.subject}}</h1>
     </h2>
-    <div class="col-1">
+
+    <div class="col-1 form-inline">
       <div class="bg-light  text-center p-3 border font-weight-bolder mb-1">{{board.voter.count}}</div>
-      <a href="#" data-uri="{%url 'main:vote_board' board.id %}" class="recommend btn btn-sm">참석</a>
+      <a href="#" data-uri="{%url 'main:vote_board' board.id %}" class="recommend btn btn-sm btn-outline-danger">참석</a>
     </div>
+
     <div class="card my-3">
       <div class="card-body">
         <div class="cartd-text" style="white-space:pre-line;">{{board.content}}</div>
@@ -105,9 +107,11 @@
       });
 
     $(".recommend").on('click', function () {
-      if (confirm("참석하시겠습니까?")) {
-        location.href = $(this).data('uri');
-      }
+      $(".recommend").on('click', function () {
+        if (confirm("참석하시겠습니까?")) {
+          location.href = $(this).data('uri');
+        }
+      });
     });
   </script>
 {% endblock %}
