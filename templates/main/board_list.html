@@ -22,13 +22,9 @@
         <tr class="text-center thead-dark">
           <th>번호</th>
           <th>클럽명</th>
-          <th style="width:35%">제목</th>
+          <th style="width:30%">제목</th>
           <th>작성자</th>
           <th>참석자 수</th>
-<<<<<<< HEAD
-          <th>모임일</th>
-=======
->>>>>>> b39c18b87adfd4a5accac5fc2f4f8297ea2d4fcb
           <th>작성일</th>
         </tr>
       </thead>
@@ -42,7 +38,7 @@
               <td class="text-left">
                 <a href="{%url 'main:detail' board.id%}">{{board.subject}}</a>
               </td>
-              <td></td>
+              <td>{{board.author.name}}</td>
               <td></td>
               <td>{{board.create_date}}</td>
             </tr>
