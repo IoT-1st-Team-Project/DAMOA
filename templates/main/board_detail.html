@@ -8,8 +8,15 @@
     </h2>
     <div class="col-1">
       <div class="bg-light  text-center p-3 border font-weight-bolder mb-1">{{board.voter.count}}</div>
-      <a href="#" data-uri="{%url 'main:vote_board' board.id %}" class="recommend btn btn-sm">참석</a>
+      <a href="#" data-uri="{%url 'main:vote_board' board.id %}" class="recommend btn btn-light">참석</a>
     </div>
+    {%if vote_board %}
+      {%for voter in vote_board %}
+        <h2>참석자:{{board.voter}}</h2>
+      {% endfor %}
+    {% else %}
+      참석자가 없습니다.
+    {% endif %}
     <div class="card my-3">
       <div class="card-body">
         <div class="cartd-text" style="white-space:pre-line;">{{board.content}}</div>
