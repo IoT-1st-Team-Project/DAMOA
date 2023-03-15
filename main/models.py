@@ -26,7 +26,7 @@ class Club(models.Model):
 # 게시글 모델
 class Board(models.Model):
     club = models.ForeignKey(Club, on_delete=models.CASCADE)
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1, null=True)
     subject = models.CharField('제목', max_length = 200,
                                help_text='게시글의 제목을 한 줄로 작성하세요.')
     content = models.TextField('내용', help_text='내용을 상세히 작성하세요.')

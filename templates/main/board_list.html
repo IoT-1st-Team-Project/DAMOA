@@ -69,20 +69,22 @@
 
       <!-- 페이지 리스트 -->
       {% for page_number in board_list.paginator.page_range %}
-        <!-- 페이지 표시 제한 기능 구현 X 저장하면 자꾸 바뀌어 settings.json 만들어야되나 -->
+      <!-- 페이지 표시 제한 기능 Ctrl+Shift_P 하고 settins.json 들어가서 save 할때 false로 바꾸고 건드리기 -->
+      {% if page_number >= board_list.number|add:-3 and page_number <= board_list.number|add:3 %}
         {% if page_number == board_list.number %}
-          <li class="page-item active" aria-current="page">
-            <a class="page-link" href="?page={{ page_number }}">
-              {{ page_number }}
-            </a>
-          </li>
+        <li class="page-item active" aria-current="page">
+          <a class="page-link" href="?page={{ page_number }}">
+            {{ page_number }}
+          </a>
+        </li>
         {% else %}
-          <li class="" page-item="page-item">
-            <a class="page-link" href="?page={{ page_number }}">
-              {{ page_number }}
-            </a>
-          </li>
+        <li class="" page-item="page-item">
+          <a class="page-link" href="?page={{ page_number }}">
+            {{ page_number }}
+          </a>
+        </li>
         {% endif %}
+      {% endif %}
       {% endfor %}
 
       <!-- 다음 페이지 -->
