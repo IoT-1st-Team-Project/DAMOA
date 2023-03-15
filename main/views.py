@@ -2,7 +2,7 @@ from .models import Club, Board
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.utils import timezone
-from .forms import BoardForm, ClubForm
+from .forms import BoardForm, ClubForm, ReplyForm
 
 def index(request):
     """
@@ -59,8 +59,18 @@ def reply_create(request, board_id):
     댓글등록
     '''
     board=get_object_or_404(Board, pk=board_id)
-    board.reply_set.create(content=request.POST.get('content'),create_date=timezone.now())
-    return redirect('main:detail', board_id=board.id)
+    if request.method=='POST':
+        form=ReplyForm(request.POST)
+        if form.is_valid():
+            reply=form.save(commit=False)
+            reply.create_date=timezone.now()
+            reply.board=board
+            reply.save()
+            return redirect('main:detail', board_id=board.id)
+    else:
+        form=ReplyForm()
+    context={'board':board, 'form':form}            
+    return render(request, 'main/board_detail.html', context)
 
 def board_create(request):
     '''
