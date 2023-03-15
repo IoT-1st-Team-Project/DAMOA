@@ -57,12 +57,19 @@ def board_list(request):
     '''
     board 출력
     '''
-    board_list=Board.objects.order_by('-id')
-
+    
     # 입력 인자
     page = request.GET.get('page', '1')  # 페이지
     kw = request.GET.get('kw', '')  # 검색어
-    board_list = Board.objects.order_by('-create_date')
+    so = request.GET.get('so', 'recent') # 정렬 기준 / default 최신순
+
+    if so == 'recent':
+        board_list = Board.objects.order_by('-create_date')
+    elif so == 'late':
+        board_list = Board.objects.order_by('create_date')
+    else : # 위 경우 제외 board_id 역순정렬
+        board_list = Board.objects.order_by('-id')
+
     if kw:
         board_list = board_list.filter(
             Q(subject__icontains=kw) |  # 제목 검색
@@ -199,8 +206,12 @@ def vote_board(request, board_id):
     추천
     '''
     board=get_object_or_404(Board, pk=board_id)
-    if request.user==board.author:
-        messages.error('본인이 작성한 글은 추천할 수없다.')
+    voters=board.voter.all()
+    for voter in voters:
+        if request.user==voter:
+            messages.error(request, "이미 참석한 글입니다.")
+    if request.user==board.author.name:
+        messages.error('본인이 작성한 글은 참석을 누를 수 없다.')
     else:
         board.voter.add(request.user)
     return redirect('main:detail', board_id=board.id)

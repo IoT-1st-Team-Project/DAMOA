@@ -17,6 +17,25 @@
   </style>
 
   <div class="container my-3">
+
+  <!-- 정렬기능 추가 -->
+  <div class="col-2">
+    <select class="form-control so">
+        <option value="recent" {% if so == 'recent' %}selected{% endif %}>
+            최신순
+        </option>
+        <option value="late" {% if so == 'late' %}selected{% endif %}>
+          오래된순
+        </option>
+        <option value="recommend" {% if so == 'recommend' %}selected{% endif %}>
+            추천순
+        </option>
+        <option value="popular" {% if so == 'popular' %}selected{% endif %}>
+            인기순
+        </option>
+    </select>
+  </div>
+
     <!-- 검색부분 추가 -->
     <div class="row my-3">
       <div class="col-6">
@@ -129,35 +148,34 @@
 
 {% endblock %}
 
-<!-- 검색기능을 위한 자바스크립트 -->
+<!-- 자바스크립트 영역 -->
 {% block script %}
-  <script type='text/javascript'>
-    const page_elements = document.getElementsByClassName("page-link");
-    Array
-      .from(page_elements)
-      .forEach(function (element) {
-        element.addEventListener('click', function () {
-          document
-            .getElementById('page')
-            .value = this.dataset.page;
-          document
-            .getElementById('searchForm')
-            .submit();
-        });
-      });
-    const btn_search = document.getElementById("btn_search");
-    btn_search.addEventListener('click', function () {
-      document
-        .getElementById('kw')
-        .value = document
-        .getElementById('search_kw')
-        .value;
-      document
-        .getElementById('page')
-        .value = 1; // 검색버튼을 클릭할 경우 1페이지부터 조회한다.
-      document
-        .getElementById('searchForm')
-        .submit();
+<script type='text/javascript'>
+// 검색기능 자바스크립트
+const page_elements = document.getElementsByClassName("page-link");
+Array.from(page_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        document.getElementById('page').value = this.dataset.page;
+        document.getElementById('searchForm').submit();
     });
-  </script>
+});
+const btn_search = document.getElementById("btn_search");
+btn_search.addEventListener('click', function() {
+    document.getElementById('kw').value = document.getElementById('search_kw').value;
+    document.getElementById('page').value = 1;      // 검색버튼을 클릭할 경우 1페이지부터 조회
+    document.getElementById('searchForm').submit();
+});
+
+// 정렬기능 자바스크립트
+const sortSelect = document.querySelector('.so');
+
+sortSelect.addEventListener('change', () => {
+  const so = sortSelect.value;
+  const currentUrl = window.location.href;
+  const url = new URL(currentUrl);
+  url.searchParams.set('so', so);
+  window.location.href = url.href;
+});
+
+</script>
 {% endblock %}
