@@ -135,3 +135,6 @@ LOGIN_REDIRECT_URL = '/main'
 
 # 로그아웃 성공 시 자동으로 이동할 URL --> config/urls.py
 LOGOUT_REDIRECT_URL = '/'
+
+# settings.py
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
