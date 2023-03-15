@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from .forms import BoardForm, ClubForm, ReplyForm
 from django.contrib import messages
-from django.db.models import Q
+from django.db.models import Q, Count
 
 def index(request):
     """
@@ -67,6 +67,12 @@ def board_list(request):
         board_list = Board.objects.order_by('-create_date')
     elif so == 'late':
         board_list = Board.objects.order_by('create_date')
+    elif so == 'recommend':
+        board_list = Board.objects.annotate(
+            num_voter = Count('voter')).order_by('-num_voter', '-create_date')
+    elif so == 'popular':
+        board_list = Board.objects.annotate(
+            num_reply = Count('reply')).order_by('-num_reply', '-create_date')
     else : # 위 경우 제외 board_id 역순정렬
         board_list = Board.objects.order_by('-id')
 
@@ -80,7 +86,7 @@ def board_list(request):
 
     paginator = Paginator(board_list, 10)  # 페이지당 10개 
     page_obj = paginator.get_page(page)
-    context = {'board_list':page_obj, 'page':page, 'kw':kw}
+    context = {'board_list':page_obj, 'page':page, 'kw':kw, 'so':so}
 
     return render(request, 'main/board_list.html', context)
 
