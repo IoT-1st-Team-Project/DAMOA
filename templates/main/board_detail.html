@@ -14,9 +14,18 @@
       <div class="card-body">
         <div class="cartd-text" style="white-space:pre-line;">{{board.content}}</div>
         <div class="d-flex justify-content-end">
+
+          {% if board.modify_date %}
+            <div class="badge badge-light p-2 text-left mx-3">
+              <div class="mb-2">수정 일자</div>
+              <div>{{ board.modify_date }}</div>
+            </div>
+          {% endif %}
+
           <div class="badge badge-light p-2 text-left">
             <div class="mb-2">작성자:
               {{board.author.name}}</div>
+            <div>{{ board.create_date }}</div>
           </div>
         </div>
       </div>
@@ -24,25 +33,43 @@
       {% if request.user == board.author %}
         <div class="my-3 ml-3">
           <a href="{% url 'main:board_modify' board.id %}" class="btn btn-sm btn-outline-secondary">수정</a>
-          <a href="#" class="delete btn btn-sm btn-outline-secondary" data-url="{% url 'main:board_delete' board.id %}">삭제</a>
+          <a href="#" class="delete btn btn-sm btn-outline-secondary" data-uri="{% url 'main:board_delete' board.id %}">삭제</a>
         </div>
       {% endif %}
     </div>
 
     <h1>{{board.reply_set.count}}개의 댓글이 있습니다.</h1>
+
     {% for reply in board.reply_set.all %}
       <div class="card my-3">
         <div class="card-text" style="white-space: pre-line;">
           {{reply.content}}
         </div>
         <div class="d-flex justify-content-end">
+
+          {% if board.modify_date %}
+            <div class="badge badge-light p-2 text-left mx-3">
+              <div class="mb-2">수정 일자</div>
+              <div>{{ reply.modify_date }}</div>
+            </div>
+          {% endif %}
+
           <div class="badge badge-light p-2 text-left">
-            <div class="mb-2">댓글작성자
-              {{user.name}}</div>
+            <div class="mb-2">작성자:{{ reply.author.name }}</div>
+            <div>{{ reply.create_date }}</div>
           </div>
         </div>
+        <!-- 댓글 수정/삭제 버튼 -->
+        {% if request.user == reply.author %}
+          <div class="my-3 ml-3">
+            <a href="{% url 'main:reply_modify' reply.id %}" class="btn btn-sm btn-outline-secondary">수정</a>
+            <a href="#" class="delete btn btn-sm btn-outline-secondary" data-uri="{% url 'main:reply_delete' reply.id %}">
+              삭제</a>
+          </div>
+        {% endif %}
       </div>
     {% endfor %}
+
     <form action="{%url 'main:reply_create' board.id%}" method="post">
       {% csrf_token %}
       {% if form.errors %}
@@ -55,6 +82,7 @@
           {% endfor %}
         </div>
       {% endif %}
+
       <div class="form-group">
         <textarea name="content" id="content" cols="30" rows="10"></textarea>
       </div>

@@ -1,4 +1,4 @@
-from .models import Club, Board
+from .models import Club, Board, Reply
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
@@ -38,6 +38,20 @@ def login(request):
     """
     return render(request, 'templates/common/login.html')   
 
+def club_create(request):
+    '''
+    클럽등록
+    '''
+    if request.method=='POST':
+        form=ClubForm(request.POST)
+        if form.is_valid():
+            club=form.save(commit=False)
+            club.save()
+            return redirect('main:main')
+    else:
+        form=ClubForm()
+    return render(request, 'main/club_form.html', {'form':form})
+    
 
 def board_list(request):
     '''
@@ -66,7 +80,7 @@ def board_list(request):
 @login_required(login_url = 'common:login')
 def board_create(request):
     '''
-    게시글등록
+    게시글 등록
     '''
     if request.method=='POST':
         form=BoardForm(request.POST)
@@ -85,7 +99,7 @@ def board_create(request):
 @login_required(login_url = 'common:login')
 def board_modify(request, board_id):
     """
-    main 게시글 수정
+    게시글 수정
     """
     board = get_object_or_404(Board, pk = board_id)
     if request.user != board.author:
@@ -110,7 +124,7 @@ def board_modify(request, board_id):
 @login_required(login_url = 'common:login')
 def board_delete(request, board_id):
     """
-    main 게시글 삭제
+    게시글 삭제
     """
     board = get_object_or_404(Board, pk = board_id)
     if request.user != board.author:
@@ -119,10 +133,11 @@ def board_delete(request, board_id):
     board.delete()
     return redirect('main:index')
 
+
 @login_required(login_url = 'common:login')
 def reply_create(request, board_id):
     '''
-    댓글등록
+    댓글 등록
     '''
     board=get_object_or_404(Board, pk=board_id)
     if request.method=='POST':
@@ -140,18 +155,26 @@ def reply_create(request, board_id):
     return render(request, 'main/board_detail.html', context)
 
 
-
-def club_create(request):
-    '''
-    클럽등록
-    '''
-    if request.method=='POST':
-        form=ClubForm(request.POST)
+@login_required(login_url = 'common:login')
+def reply_modify(request, reply_id):
+    """
+    답변 수정
+    """
+    reply = get_object_or_404(Reply, pk = reply_id)
+    if request.user != reply.author:
+        messages.error(request, '수정 권한이 없습니다.')
+        return redirect('main:detail', board_id = reply.board.id)
+    
+    if request.method == "POST":
+        form = ReplyForm(request.POST, instance = reply)
         if form.is_valid():
-            club=form.save(commit=False)
-            club.save()
-            return redirect('main:main')
+            reply = form.save(commit = False)
+            reply.author = request.user
+            reply.modify_date = timezone.now()
+            reply.save()
+            return redirect('main:detail', board_id = reply.board.id)
     else:
+<<<<<<< HEAD
         form=ClubForm()
     return render(request, 'main/club_form.html', {'form':form})
     
@@ -166,3 +189,22 @@ def vote_board(request, board_id):
     else:
         board.voter.add(request.user)
     return redirect('main:detail', board_id=board.id)
+=======
+        form = ReplyForm(instance = reply)
+    context = {'reply': reply, 'form':form }
+    return render(request, 'main/reply_form.html', context)
+
+
+@login_required(login_url='common:login')
+def reply_delete(request, reply_id):
+    """
+    답변 삭제
+    """
+    reply = get_object_or_404(Reply, pk = reply_id)
+    if request.user != reply.author:
+        messages.error(request, '삭제 권한이 없습니다.')
+    else:
+        reply.delete()
+    return redirect('main:detail', board_id = reply.board.id)
+
+>>>>>>> bbb8c46f47a4be79b1f010cd1cad56074016ba74
