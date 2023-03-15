@@ -174,22 +174,6 @@ def reply_modify(request, reply_id):
             reply.save()
             return redirect('main:detail', board_id = reply.board.id)
     else:
-<<<<<<< HEAD
-        form=ClubForm()
-    return render(request, 'main/club_form.html', {'form':form})
-    
-
-def vote_board(request, board_id):
-    '''
-    추천
-    '''
-    board=get_object_or_404(Board, pk=board_id)
-    if request.user==board.author:
-        messages.error('본인이 작성한 글은 추천할 수없다.')
-    else:
-        board.voter.add(request.user)
-    return redirect('main:detail', board_id=board.id)
-=======
         form = ReplyForm(instance = reply)
     context = {'reply': reply, 'form':form }
     return render(request, 'main/reply_form.html', context)
@@ -207,4 +191,14 @@ def reply_delete(request, reply_id):
         reply.delete()
     return redirect('main:detail', board_id = reply.board.id)
 
->>>>>>> bbb8c46f47a4be79b1f010cd1cad56074016ba74
+@login_required(login_url='common:login')
+def vote_board(request, board_id):
+    '''
+    추천
+    '''
+    board=get_object_or_404(Board, pk=board_id)
+    if request.user==board.author:
+        messages.error('본인이 작성한 글은 추천할 수없다.')
+    else:
+        board.voter.add(request.user)
+    return redirect('main:detail', board_id=board.id)
