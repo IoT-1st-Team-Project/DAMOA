@@ -7,6 +7,6 @@
   "terminal.integrated.defaultProfile.windows": "Command Prompt",
   "editor.defaultFormatter": "Glavin001.unibeautify-vscode",
   "editor.formatOnPaste": true,
-  "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
   "git.autofetch": true
 }

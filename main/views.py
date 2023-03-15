@@ -207,21 +207,17 @@ def reply_delete(request, reply_id):
     return redirect('main:detail', board_id = reply.board.id)
 
 
-
 @login_required(login_url='common:login')
 def vote_board(request, board_id):
     '''
     참석
     '''
     board = get_object_or_404(Board, pk=board_id)
-    voters=board.voter.all()
-    for voter in voters:
-        if request.user== voter:
-            messages.error(request, "이미 참석을 누르셨습니다.")
     if request.user == board.author:
         messages.error(request, '본인이 작성한 글은 참석을 누를 수 없습니다.')
+    elif request.user in board.voter.all():
+        board.voter.remove(request.user)
     else:
         board.voter.add(request.user)
-        messages.success(request, '게시물에 참석하셨습니다.')
     return redirect('main:detail', board_id=board.id)
 
