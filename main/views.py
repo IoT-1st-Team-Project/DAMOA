@@ -200,6 +200,8 @@ def reply_delete(request, reply_id):
         reply.delete()
     return redirect('main:detail', board_id = reply.board.id)
 
+<<<<<<< HEAD
+=======
 # @login_required(login_url='common:login')
 # def vote_board(request, board_id):
 #     '''
@@ -211,15 +213,25 @@ def reply_delete(request, reply_id):
 #     else:
 #         board.voter.add(request.user)
 #     return redirect('main:detail', board_id=board.id)
+>>>>>>> 4cb021ca9c309343859fcdefb8f3f948d8a45cf1
 
 @login_required(login_url='common:login')
 def vote_board(request, board_id):
     '''
-    추천
+    참석
     '''
     board = get_object_or_404(Board, pk=board_id)
+<<<<<<< HEAD
+    voters=board.voter.all()
+    for voter in voters:
+        if request.user== voter:
+            messages.error(request, "이미 참석을 누르셨습니다.")
+    if request.user == board.author:
+        messages.error(request, '본인이 작성한 글은 참석을 누를 수 없습니다.')
+=======
     if request.user == board.author:
         messages.error(request, '본인이 작성한 글은 참석을 누를 수 없다.')
+>>>>>>> 4cb021ca9c309343859fcdefb8f3f948d8a45cf1
     else:
         board.voter.add(request.user)
         messages.success(request, '게시물에 참석하셨습니다.')
