@@ -191,3 +191,14 @@ def reply_delete(request, reply_id):
         reply.delete()
     return redirect('main:detail', board_id = reply.board.id)
 
+@login_required(login_url='common:login')
+def vote_board(request, board_id):
+    '''
+    추천
+    '''
+    board=get_object_or_404(Board, pk=board_id)
+    if request.user==board.author:
+        messages.error('본인이 작성한 글은 추천할 수없다.')
+    else:
+        board.voter.add(request.user)
+    return redirect('main:detail', board_id=board.id)
