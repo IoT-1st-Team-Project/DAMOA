@@ -68,7 +68,7 @@ def board_list(request):
             Q(subject__icontains=kw) |  # 제목 검색
             Q(content__icontains=kw) |  # 내용 검색
             Q(author__name__icontains=kw) |  # 작성자 검색
-            Q(club__category__icontains=kw)       # 클럽 검색
+            Q(club__name__icontains=kw)       # 클럽 검색
         ).distinct()
 
     paginator = Paginator(board_list, 10)  # 페이지당 10개 
@@ -76,6 +76,8 @@ def board_list(request):
     context = {'board_list':page_obj, 'page':page, 'kw':kw}
 
     return render(request, 'main/board_list.html', context)
+
+
 
 @login_required(login_url = 'common:login')
 def board_create(request):
@@ -131,7 +133,7 @@ def board_delete(request, board_id):
         messages.error(request, '삭제 권한이 없습니다.')
         return redirect('main:detail', board_id = board.id)
     board.delete()
-    return redirect('main:index')
+    return redirect('main:board_list')
 
 
 @login_required(login_url = 'common:login')
