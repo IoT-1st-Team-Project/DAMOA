@@ -18,5 +18,7 @@ urlpatterns = [
 
     path('main/reply/modify/<int:reply_id>/', views.reply_modify, name='reply_modify'),
     path('main/reply/delete/<int:reply_id>/', views.reply_delete, name='reply_delete'),
+
+    path('vote/board/<int:board_id>/', views.vote_board, name = 'vote_board'),
  
 ]

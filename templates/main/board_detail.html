@@ -3,13 +3,25 @@
 
 {% block content %}
   <div class="container my-3">
+
+    {% if messages%}
+      <div class="alert alert-danger my-3" role="alert">
+        {% for message in messages %}
+          <strong>{{ messages.tags }}</strong>
+          <ul>
+            <li>{{ message.message }}</li>
+          </ul>
+        {% endfor %}
+      </div>
+    {% endif %}
+
     <h2 class="border-bottom py-2">
       <h1>{{board.subject}}</h1>
     </h2>
 
     <div class="col-1 form-inline">
       <div class="bg-light  text-center p-3 border font-weight-bolder mb-1">{{board.voter.count}}</div>
-      <a href="#" data-uri="{%url 'main:vote_board' board.id %}" class="recommend btn btn-light">참석</a>
+      <a href="#" data-uri="{%url 'main:vote_board' board.id %}" class="recommend btn btn-sm btn-outline-danger btn-block my-1">참석</a>
     </div>
 
     {%if vote_board %}
@@ -114,7 +126,7 @@
         });
       });
 
-    $(".recommend").on('click', function () {
+    $(document).ready(function () {
       $(".recommend").on('click', function () {
         if (confirm("참석하시겠습니까?")) {
           location.href = $(this).data('uri');
