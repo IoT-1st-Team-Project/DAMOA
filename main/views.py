@@ -81,7 +81,8 @@ def board_list(request):
             Q(subject__icontains=kw) |  # 제목 검색
             Q(content__icontains=kw) |  # 내용 검색
             Q(author__name__icontains=kw) |  # 작성자 검색
-            Q(club__name__icontains=kw)       # 클럽 검색
+            Q(club__name__icontains=kw) |    # 클럽 이름 검색
+            Q(club__category__icontains=kw)  # 클럽 카테고리 검색
         ).distinct()
 
     paginator = Paginator(board_list, 10)  # 페이지당 10개 
