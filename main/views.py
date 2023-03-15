@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from .forms import BoardForm, ClubForm, ReplyForm
 from django.contrib import messages
+from django.db.models import Q
 
 def index(request):
     """
@@ -60,10 +61,19 @@ def board_list(request):
 
     # 입력 인자
     page = request.GET.get('page', '1')  # 페이지
+    kw = request.GET.get('kw', '')  # 검색어
     board_list = Board.objects.order_by('-create_date')
-    paginator = Paginator(board_list, 10)  # 페이지당 5개 테스트
+    if kw:
+        board_list = board_list.filter(
+            Q(subject__icontains=kw) |  # 제목 검색
+            Q(content__icontains=kw) |  # 내용 검색
+            Q(author__name__icontains=kw) |  # 작성자 검색
+            Q(club__category__icontains=kw)       # 클럽 검색
+        ).distinct()
+
+    paginator = Paginator(board_list, 10)  # 페이지당 10개 
     page_obj = paginator.get_page(page)
-    context = {'board_list':page_obj}
+    context = {'board_list':page_obj, 'page':page, 'kw':kw}
 
     return render(request, 'main/board_list.html', context)
 
