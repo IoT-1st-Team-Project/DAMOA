@@ -32,15 +32,15 @@
 
     <body>
       <div class="login_box">
-        <h2 class="start_damoa mt-3" align="center">
+        <h2 class="start_damoa mt-3" text-align="center">
           <a href="{% url 'main:index' %}" style="color: orange">
             DAMOA를 시작해보세요</a>
         </h2><br>
 
         <div class="container my-3">
           <form method="post" class="post-form" action="{% url 'common:login' %}">
-            {% include "form_errors.html" %}
             {% csrf_token %}
+            {% include "form_errors.html" %}
             <div>
               <h3>로그인 하세요</h3>
               <p>모임에 참여해보세요</p>
