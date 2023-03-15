@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from .forms import BoardForm, ClubForm, ReplyForm
 from django.contrib import messages
-from django.db.models import Q
+from django.db.models import Q, Count
 
 def index(request):
     """
@@ -67,6 +67,12 @@ def board_list(request):
         board_list = Board.objects.order_by('-create_date')
     elif so == 'late':
         board_list = Board.objects.order_by('create_date')
+    elif so == 'recommend':
+        board_list = Board.objects.annotate(
+            num_voter = Count('voter')).order_by('-num_voter', '-create_date')
+    elif so == 'popular':
+        board_list = Board.objects.annotate(
+            num_reply = Count('reply')).order_by('-num_reply', '-create_date')
     else : # 위 경우 제외 board_id 역순정렬
         board_list = Board.objects.order_by('-id')
 
@@ -80,7 +86,7 @@ def board_list(request):
 
     paginator = Paginator(board_list, 10)  # 페이지당 10개 
     page_obj = paginator.get_page(page)
-    context = {'board_list':page_obj, 'page':page, 'kw':kw}
+    context = {'board_list':page_obj, 'page':page, 'kw':kw, 'so':so}
 
     return render(request, 'main/board_list.html', context)
 
@@ -200,6 +206,7 @@ def reply_delete(request, reply_id):
         reply.delete()
     return redirect('main:detail', board_id = reply.board.id)
 
+<<<<<<< HEAD
 # @login_required(login_url='common:login')
 # def vote_board(request, board_id):
 #     '''
@@ -211,6 +218,9 @@ def reply_delete(request, reply_id):
 #     else:
 #         board.voter.add(request.user)
 #     return redirect('main:detail', board_id=board.id)
+=======
+
+>>>>>>> 8630aaa59369d0a0c1873e353abc8371af219c33
 
 @login_required(login_url='common:login')
 def vote_board(request, board_id):
@@ -218,8 +228,17 @@ def vote_board(request, board_id):
     참석
     '''
     board = get_object_or_404(Board, pk=board_id)
+<<<<<<< HEAD
     if request.user == board.author:
         messages.error(request, '본인이 작성한 글은 참석을 누를 수 없다.')
+=======
+    voters=board.voter.all()
+    for voter in voters:
+        if request.user== voter:
+            messages.error(request, "이미 참석을 누르셨습니다.")
+    if request.user == board.author:
+        messages.error(request, '본인이 작성한 글은 참석을 누를 수 없습니다.')
+>>>>>>> 8630aaa59369d0a0c1873e353abc8371af219c33
     else:
         board.voter.add(request.user)
         messages.success(request, '게시물에 참석하셨습니다.')
