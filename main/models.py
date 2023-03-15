@@ -40,6 +40,7 @@ class Board(models.Model):
 # 댓글 모델
 class Reply(models.Model):
     board = models.ForeignKey(Board, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1, null=True)
     content = models.TextField()
     create_date = models.DateTimeField('생성일')
     modify_date = models.DateTimeField(null=True, blank=True)
