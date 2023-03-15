@@ -155,3 +155,14 @@ def club_create(request):
         form=ClubForm()
     return render(request, 'main/club_form.html', {'form':form})
     
+
+def vote_board(request, board_id):
+    '''
+    추천
+    '''
+    board=get_object_or_404(Board, pk=board_id)
+    if request.user==board.author:
+        messages.error('본인이 작성한 글은 추천할 수없다.')
+    else:
+        board.voter.add(request.user)
+    return redirect('main:detail', board_id=board.id)

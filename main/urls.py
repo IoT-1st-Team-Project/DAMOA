@@ -13,5 +13,7 @@ urlpatterns = [
     path('main/board_list/reply/create/<int:board_id>/', views.reply_create, name='reply_create'),
     path('main/board_list/<int:board_id>/', views.board_modify, name='board_modify'),
     path('main/board_list/<int:board_id>/', views.board_delete, name='board_delete'),
+    path('main/board_list/vote/board/<int:board_id>/', views.vote_board, name='vote_board'),
+
  
 ]
