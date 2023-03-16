@@ -63,10 +63,10 @@
         {% if board_list %}
           {% for board in board_list %}
             <tr class="text-center">
-              <td>{{ board_list.paginator.count|sub:board_list.start_index|sub:forloop.counter0|add:1 }}</td>
+              <td>{{board.id}}</td>
               <td>{{ board.club }}</td>
               <td class="text-left">
-                <a href="{%url 'main:detail' board.id%}">{{board.subject}}</a>
+                <a href="{%url 'main:detail' board.id%}">{{board.subject}}</a>  <small><i class="fa-regular fa-comments"></i>{{board.reply_set.count}}</small>
               </td>
               <td>{{board.author.name}}</td>
               <td>{{board.voter.count}}</td>

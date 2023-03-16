@@ -51,6 +51,18 @@ def club_create(request):
     else:
         form=ClubForm()
     return render(request, 'main/club_form.html', {'form':form})
+
+@login_required(login_url = 'common:login')
+def club_delete(request, club_id):
+    """
+    클럽 삭제
+    """
+    club = get_object_or_404(Club, pk = club_id)
+    if request.user != club.author:
+        messages.error(request, '삭제 권한이 없습니다.')
+        return redirect('main:main', club_id = club.id)
+    club.delete()
+    return redirect('main:main')
     
 
 def board_list(request):

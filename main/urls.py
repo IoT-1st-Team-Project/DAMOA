@@ -20,5 +20,7 @@ urlpatterns = [
     path('main/reply/delete/<int:reply_id>/', views.reply_delete, name='reply_delete'),
 
     path('vote/board/<int:board_id>/', views.vote_board, name = 'vote_board'),
+    path('main/delete/<int:club_id>/', views.club_delete, name='club_delete'),
+
  
 ]
