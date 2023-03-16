@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "main",
-    'bootstrap_datepicker_plus',
+    "django_summernote",
 ]
 
 AUTH_USER_MODEL = "common.CustomUser"
@@ -139,3 +139,13 @@ LOGOUT_REDIRECT_URL = '/'
 
 # settings.py
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+
+SUMMERNOTE_CONFIG = {
+    'attachment_model': 'main.SummerNoteAttachment',
+    'attachment_require_authentication': True,
+    'summernote': {
+        'width': '100%',
+        'height': '480px',
+        'lang': 'ko-KR',
+    },
+}

@@ -1,8 +1,10 @@
 from django import forms
 from main.models import Board, Club, Reply
-# from bootstrap_datepicker_plus import DatePickerInput
+from django_summernote.widgets import SummernoteWidget
 
 class BoardForm(forms.ModelForm):
+    content = forms.CharField(widget=SummernoteWidget())
+
     class Meta:
         model = Board
         fields = ['club','subject','content','event_date']
