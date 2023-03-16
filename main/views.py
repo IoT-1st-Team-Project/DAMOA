@@ -113,16 +113,17 @@ def board_create(request):
     '''
     게시글 등록
     '''
+    user=request.user
     if request.method=='POST':
-        form=BoardForm(request.user, request.POST)
+        form=BoardForm(user, request.POST)
         if form.is_valid():
             board=form.save(commit=False)
-            board.author=request.user
+            board.author=user
             board.create_date = timezone.now()
             board.save()
             return redirect('main:board_list')
     else:
-        form=BoardForm(request.user)
+        form=BoardForm()
             
     return render(request, 'main/board_form.html', {'form':form})
 
