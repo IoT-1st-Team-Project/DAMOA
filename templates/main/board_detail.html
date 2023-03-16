@@ -113,34 +113,35 @@
           </div>
         </div>
       </div>
-    {% endblock %}
-    {% block script %}
-      <script type='text/javascript'>
-        const delete_elements = document.getElementsByClassName("delete");
-        Array
-          .from(delete_elements)
-          .forEach(function (element) {
-            element.addEventListener('click', function () {
-              if (confirm("정말로 삭제하시겠습니까?")) {
-                location.href = this.dataset.uri;
-              };
-            });
-          });
-
-        $(document).ready(function () {
-          $(".recommend").on('click', function () {
-            if (confirm("참석하시겠습니까?")) {
-              location.href = $(this).data('uri');
-            }
+    </div>
+  {% endblock %}
+  {% block script %}
+    <script type='text/javascript'>
+      const delete_elements = document.getElementsByClassName("delete");
+      Array
+        .from(delete_elements)
+        .forEach(function (element) {
+          element.addEventListener('click', function () {
+            if (confirm("정말로 삭제하시겠습니까?")) {
+              location.href = this.dataset.uri;
+            };
           });
         });
 
-        $(document).ready(function () {
-          $(".recommend1").on('click', function () {
-            if (confirm("참석취소하시겠습니까?")) {
-              location.href = $(this).data('uri');
-            }
-          });
+      $(document).ready(function () {
+        $(".recommend").on('click', function () {
+          if (confirm("참석하시겠습니까?")) {
+            location.href = $(this).data('uri');
+          }
         });
-      </script>
-    {% endblock %}
+      });
+
+      $(document).ready(function () {
+        $(".recommend1").on('click', function () {
+          if (confirm("참석취소하시겠습니까?")) {
+            location.href = $(this).data('uri');
+          }
+        });
+      });
+    </script>
+  {% endblock %}

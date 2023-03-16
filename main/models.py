@@ -19,6 +19,7 @@ class Club(models.Model):
         null=True
     )
     name=models.TextField('클럽이름')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1, null=True, related_name='author_club')
     def __str__(self):
         return self.name
 
