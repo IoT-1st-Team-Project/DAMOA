@@ -171,56 +171,14 @@
     </table>
   {% endblock %}
 
-  <hr style="color: black; size: 3px;">
-  <!--카테고리-->
-  <table class="table" style="text-align: center;">
-    <td>
-      <div>
-        <div class="icon-box">
-          <h4>최신 클럽<br>
-            <a href="{% url 'main:board_list'%}?so=recent" style="display: block;">
-              <img src="{% static 'img/pet.png' %}"></a>
-          </h4>
-          <p></p>
-          <p>모여모여!<br>가장 최신 클럽을 가입해 보세요</p>
-        </div>
-      </div>
-    </td>
-    <td>
-      <div>
-        <div class="icon-box">
-          <h4>인기 클럽<br>
-            <a href="{% url 'main:board_list'%}?so=popular" style="display: block;">
-              <img src="{% static 'img/pet.png' %}"></a>
-          </h4>
-          <p></p>
-          <p>인기폭발!<br>가장 인기있는 클럽에 가입해 보세요</p>
-        </div>
-      </div>
-    </td>
-    <td>
-      <div>
-        <div class="icon-box">
-          <h4>추천 클럽<br>
-            <a href="{% url 'main:board_list'%}?so=recommend" style="display: block;">
-              <img src="{% static 'img/pet.png' %}"></a>
-          </h4>
-          <p></p>
-          <p>강력추천!<br>다모아가 추천하는 클럽에 가입해 보세요</p>
-        </div>
-      </div>
-    </td>
-  </table>
-</div>
-{% endblock %}
-{% block script %}
-<script>
-  $(document).ready(function () {
-    $(".delete").on('click', function () {
-      if (confirm("정말로 삭제하시겠습니까?")) {
-        location.href = $(this).data('uri');
-      }
-    });
-  });
-</script>
-{% endblock %}
+  {% block script %}
+    <script>
+      $(document).ready(function () {
+        $(".delete").on('click', function () {
+          if (confirm("정말로 삭제하시겠습니까?")) {
+            location.href = $(this).data('uri');
+          }
+        });
+      });
+    </script>
+  {% endblock %}

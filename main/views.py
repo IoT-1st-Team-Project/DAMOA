@@ -38,6 +38,7 @@ def login(request):
     """
     return render(request, 'templates/common/login.html')   
 
+
 def club_create(request):
     '''
     클럽등록
@@ -46,11 +47,13 @@ def club_create(request):
         form=ClubForm(request.POST)
         if form.is_valid():
             club=form.save(commit=False)
+            club.author = request.user
             club.save()
             return redirect('main:main')
     else:
         form=ClubForm()
     return render(request, 'main/club_form.html', {'form':form})
+
 
 @login_required(login_url = 'common:login')
 def club_delete(request, club_id):
