@@ -7,6 +7,10 @@
       <i class="fa-regular fa-pen-to-square"></i>
       게시글 등록
     </h4>
+
+    {% for c in user.author_club.all %}
+      {{c.name}}
+    {%endfor %}
     <form method="post" class="post-form my-3">
       {%csrf_token%}
       {{form.as_p}}
