@@ -39,12 +39,12 @@
     <table class="table">
       <thead></thead>
       <tbody style="text-align: center;">
-          <tr>
-            <td>
-              <a class="club-link" href="{% url 'main:board_list'%}" style="display: block;">
-                <img src="{% static 'img/gallery/all.png' %}" style="width: 180px; height: auto;">
-                <br>전체글 보기</a>
-            </td>
+        <tr>
+          <td>
+            <a class="club-link" href="{% url 'main:board_list'%}" style="display: block;">
+              <img src="{% static 'img/gallery/all.png' %}" style="width: 180px; height: auto;">
+              <br>전체글 보기</a>
+          </td>
 
           <td>
             <a href="{% url 'main:board_list'%}?kw=SP" style="display: block;">
@@ -111,81 +111,66 @@
           </thead>
           <tbody>
             {% if club_list %}
-              {%for club in club_list%}
+              {% for club in club_list %}
                 <tr>
                   <td>{{forloop.counter}}</td>
                   <td>
                     <a href="#">{{club.name}}</a>
                   </td>
                 </tr>
+              {% endfor %}
+            {% else %}
+              <tr>
+                게시글이 없습니다.
+              </tr>
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+    </div>
 
-                {%endfor%}
-                {%else%}
-                <tr>
-                  게시글이 없습니다.
-                </tr>
-                {%endif%}
-              </tbody>
-            </table>
+    <hr style="color: black; size: 3px;">
+    <!--카테고리-->
+    <table class="table" style="text-align: center;">
+      <td>
+        <div>
+          <div class="icon-box">
+            <h4>최신 클럽<br>
+
+              <a href="{% url 'main:board_list'%}?so=recent" style="display: block;">
+                <img src="{% static 'img/pet.png' %}"></a>
+            </h4>
+            <p></p>
+            <p>모여모여!<br>가장 최신 클럽을 가입해 보세요</p>
           </div>
         </div>
+      </td>
 
-              <hr style="color: black; size: 3px;">
-              <!--카테고리-->
+      <td>
+        <div>
+          <div class="icon-box">
+            <h4>인기 클럽<br>
 
-            <table class="table" style="text-align: center;">
-              <td>
-                  <div>
-                    <div class="icon-box">
-                      <h4>최신 클럽<br>
+              <a href="{% url 'main:board_list'%}?so=popular" style="display: block;">
+                <img src="{% static 'img/pet.png' %}"></a>
+            </h4>
+            <p></p>
+            <p>인기폭발!<br>가장 인기있는 클럽에 가입해 보세요</p>
+          </div>
+        </div>
+      </td>
 
-                  
-
-                  <a href="{% url 'main:board_list'%}?so=recent" style="display: block;">
-                    
-                    <img src="{% static 'img/pet.png' %}"></a>
-
-                
-
-                </h4>
-                      <p></p>
-                      <p>모여모여!<br>가장 최신 클럽을 가입해 보세요</p>
-                    </div>
-                  </div>
-              </td>
-
-              <td>
-                  <div>
-                    <div class="icon-box">
-                      <h4>인기 클럽<br>
-                  
-                  <a href="{% url 'main:board_list'%}?so=popular" style="display: block;">
-                    
-                    <img src="{% static 'img/pet.png' %}"></a>
-
-                
-
-                </h4>
-                      <p></p>
-                      <p>인기폭발!<br>가장 인기있는 클럽에 가입해 보세요</p>
-                    </div>
-                  </div>
-              </td>
-
-              <td>
-                  <div>
-                    <div class="icon-box">
-                      <h4>추천 클럽<br>
-                  
-                  <a href="{% url 'main:board_list'%}?so=recommend" style="display: block;">
-                    
-                    <img src="{% static 'img/pet.png' %}"></a>
-                
-                </h4>
-                      <p></p>
-                      <p>강력추천!<br>다모아가 추천하는 클럽에 가입해 보세요</p>
-                    </div>
-                  </div>
-              </td>
-            </table>
-            {% endblock %}
+      <td>
+        <div>
+          <div class="icon-box">
+            <h4>추천 클럽<br>
+              <a href="{% url 'main:board_list'%}?so=recommend" style="display: block;">
+                <img src="{% static 'img/pet.png' %}"></a>
+            </h4>
+            <p></p>
+            <p>강력추천!<br>다모아가 추천하는 클럽에 가입해 보세요</p>
+          </div>
+        </div>
+      </td>
+    </table>
+  {% endblock %}
