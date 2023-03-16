@@ -55,7 +55,8 @@
           <th style="width:30%">제목</th>
           <th>작성자</th>
           <th>참석자 수</th>
-          <th>작성일</th>
+          <th>모임일</th>
+          <!-- <th>작성일</th> -->
         </tr>
       </thead>
 
@@ -70,7 +71,8 @@
               </td>
               <td>{{board.author.name}}</td>
               <td>{{board.voter.count}}</td>
-              <td>{{board.create_date}}</td>
+              <td>{{board.event_date}}</td>
+              <!-- <td>{{board.create_date}}</td> -->
             </tr>
 
           {% endfor %}
