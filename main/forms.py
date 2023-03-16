@@ -7,13 +7,14 @@ class BoardForm(forms.ModelForm):
 
     class Meta:
         model = Board
-        fields = ['club','subject','content']
-        labels={
-            'club':'클럽',
-            'subject':'제목',
-            'content':'내용',
+        fields = ['club','subject','content','event_date']
+        widgets = {
+            'subject': forms.TextInput(attrs={'placeholder': '제목을 입력하세요.'}),
+            'content': forms.Textarea(attrs={'placeholder': '내용을 입력하세요.'}),
+            'event_date': forms.DateTimeInput(attrs={'placeholder': '2023-03-16 14:03 형식'},format='%Y-%m-%d'),
         }
-        
+    
+   
 class ClubForm(forms.ModelForm):
     class Meta:
         model = Club
