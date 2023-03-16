@@ -92,7 +92,8 @@
         </tr>
       </tbody>
     </table>
-    <div>
+
+    <div style="overflow:scroll; height:400px;">
       <a href="{%url 'main:club_create' %}" class="btn btn-warning">클럽 만들기</a>
       <div class="container">
         <table class="table">
@@ -104,6 +105,7 @@
             </tr>
           </thead>
           <tbody>
+
             {% if club_list %}
               {% for club in club_list %}
                 <tr>
@@ -129,6 +131,7 @@
         </table>
       </div>
     </div>
+
     <hr style="color: black; size: 3px;">
     <!--카테고리-->
     <table class="table" style="text-align: center;">
