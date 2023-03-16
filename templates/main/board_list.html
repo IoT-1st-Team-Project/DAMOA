@@ -47,7 +47,7 @@
       </div>
   </div>
 
-    <table class="table ">
+    <table class="table">
       <thead>
         <tr class="text-center thead-dark">
           <th>번호</th>
@@ -158,7 +158,7 @@
   <form id="searchForm" method="get" action="{% url 'main:board_list' %}">
     <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
     <input type="hidden" id="page" name="page" value="{{ page }}">
-    <input type="hidden" id="so" name="so" value={{ so }}">"
+    <input type="hidden" id="so" name="so" value="{{ so }}">
   </form>
 
 {% endblock %}
