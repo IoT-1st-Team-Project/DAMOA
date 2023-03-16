@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "main",
+    'bootstrap_datepicker_plus',
 ]
 
 AUTH_USER_MODEL = "common.CustomUser"

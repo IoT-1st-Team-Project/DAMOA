@@ -34,7 +34,7 @@ class Board(models.Model):
     create_date = models.DateTimeField('생성일')
     modify_date = models.DateTimeField(null=True, blank=True)
     voter=models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='voter_board')
-    # like = models.ManyToManyField(User, related_name='reply_like')
+    event_date = models.DateTimeField('모임일',null=True, blank=True)
     def __str__(self):
         return self.subject
 
