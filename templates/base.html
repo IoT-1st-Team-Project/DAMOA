@@ -48,6 +48,9 @@
                   {{ user.name }}
                   (로그아웃)
                 </a>
+                <span style="color: blue;">
+                  <a href="{% url 'common:re_password' %}">비밀번호 재설정</a>
+                </span>
               {% else %}
                 <a class="nav-link justify-content-end" href="{% url 'common:login' %}">
                   <i class="fa-solid fa-right-to-bracket"></i>
