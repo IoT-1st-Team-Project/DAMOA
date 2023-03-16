@@ -1,5 +1,6 @@
 from django.urls import path, include
 from . import views
+from django_summernote import urls as summernote_urls
 
 app_name = 'main'
 
@@ -22,5 +23,6 @@ urlpatterns = [
     path('vote/board/<int:board_id>/', views.vote_board, name = 'vote_board'),
     path('main/delete/<int:club_id>/', views.club_delete, name='club_delete'),
 
+    path('summernote/', include('django_summernote.urls')),
  
 ]

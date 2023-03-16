@@ -1,6 +1,7 @@
 from django.db import models
 # from django.contrib.auth.models import User
 from django.conf import settings
+from django_summernote.models import AbstractAttachment
 
 class Club(models.Model):
     class category(models.TextChoices):
@@ -56,3 +57,7 @@ class ClubPost(models.Model) :
     board = models.ForeignKey(Board, on_delete=models.CASCADE)
     content = models.TextField()
     create_date = models.DateTimeField('생성일')
+
+# 서머노트 파일업로드 모델
+class SummerNoteAttachment(AbstractAttachment):
+    file = models.FileField(upload_to='attachments/')
