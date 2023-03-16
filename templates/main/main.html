@@ -39,34 +39,24 @@
     <table class="table">
       <thead></thead>
       <tbody style="text-align: center;">
-<<<<<<< HEAD
         <tr>
           <td>
-            <a class="club-link" href="{% url 'main:board_list'%}">전체글 보기</a>
+            <a class="club-link" href="{% url 'main:board_list'%}" style="display: block;">
+              <img src="{% static 'img/gallery/all.png' %}" style="width: 180px; height: auto;">
+              <br>전체글 보기</a>
           </td>
-=======
-          <tr>
-            <td>
-              <a class="club-link" href="{% url 'main:board_list'%}" style="display: block;">
-                <img src="{% static 'img/gallery/all.png' %}" style="width: 180px; height: auto;">
-                <br>전체글 보기</a>
-            </td>
->>>>>>> f560f0231df7938792472f73d7b33bcd066f15d8
-
           <td>
             <a href="{% url 'main:board_list'%}?kw=SP" style="display: block;">
               <img src="{% static 'img/gallery/sports.png' %}" style="width: 180px; height: auto;">
             </a>
             <br>스포츠
           </td>
-
           <td>
             <a href="{% url 'main:board_list'%}?kw=CK" style="display: block;">
               <img class="club" src="{% static 'img/gallery/cook.png' %}" style="width: 180px; height: auto;">
             </a>
             <br>요리
           </td>
-
           <td>
             <a href="{% url 'main:board_list'%}?kw=CT" style="display: block;">
               <img class="club" src="{% static 'img/gallery/culture.png' %}" style="width: 180px; height: auto;">
@@ -81,21 +71,18 @@
             </a>
             <br>아웃도어
           </td>
-
           <td>
             <a href="{% url 'main:board_list'%}?kw=LA" style="display: block;">
               <img class="club" src="{% static 'img/gallery/language.png' %}" style="width: 180px; height: auto;">
             </a>
             <br>언어
           </td>
-
           <td>
             <a href="{% url 'main:board_list'%}?kw=GA" style="display: block;">
               <img class="club" src="{% static 'img/gallery/game.png' %}" style="width: 180px; height: auto;">
             </a>
             <br>게임/오락
           </td>
-
           <td>
             <a href="{% url 'main:board_list'%}?kw=MU" style="display: block;">
               <img class="club" src="{% static 'img/gallery/music.png' %}" style="width: 180px; height: auto;">
@@ -105,7 +92,6 @@
         </tr>
       </tbody>
     </table>
-
     <div>
       <a href="{%url 'main:club_create' %}" class="btn btn-warning">클럽 만들기</a>
       <div class="container">
@@ -119,7 +105,7 @@
           </thead>
           <tbody>
             {% if club_list %}
-              {%for club in club_list%}
+              {% for club in club_list %}
                 <tr>
                   <td>{{forloop.counter}}</td>
                   <td>
@@ -133,80 +119,66 @@
                     {% endif %}
                   </td>
                 </tr>
-
-                {%endfor%}
-                {%else%}
-                <tr>
-                  게시글이 없습니다.
-                </tr>
-                {%endif%}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <hr style="color: black; size: 3px;">
-        <!--카테고리-->
-
-        <table class="table" style="text-align: center;">
-          <td>
-            <div>
-              <div class="icon-box">
-                <h4>최신 클럽<br>
-
-                  <a href="{% url 'main:board_list'%}?so=recent" style="display: block;">
-
-                    <img src="{% static 'img/pet.png' %}"></a>
-
-                </h4>
-                <p></p>
-                <p>모여모여!<br>가장 최신 클럽을 가입해 보세요</p>
-              </div>
-            </div>
-          </td>
-
-          <td>
-            <div>
-              <div class="icon-box">
-                <h4>인기 클럽<br>
-
-                  <a href="{% url 'main:board_list'%}?so=popular" style="display: block;">
-
-                    <img src="{% static 'img/pet.png' %}"></a>
-
-                </h4>
-                <p></p>
-                <p>인기폭발!<br>가장 인기있는 클럽에 가입해 보세요</p>
-              </div>
-            </div>
-          </td>
-
-          <td>
-            <div>
-              <div class="icon-box">
-                <h4>추천 클럽<br>
-
-                  <a href="{% url 'main:board_list'%}?so=recommend" style="display: block;">
-
-                    <img src="{% static 'img/pet.png' %}"></a>
-
-                </h4>
-                <p></p>
-                <p>강력추천!<br>다모아가 추천하는 클럽에 가입해 보세요</p>
-              </div>
-            </div>
-          </td>
+              {% endfor %}
+            {% else %}
+              <tr>
+                게시글이 없습니다.
+              </tr>
+            {% endif %}
+          </tbody>
         </table>
       </div>
-    {% endblock %}
-    {% block script %}
-      <script>
-        $(document).ready(function () {
-          $(".delete").on('click', function () {
-            if (confirm("정말로 삭제하시겠습니까?")) {
-              location.href = $(this).data('uri');
-            }
-          });
+    </div>
+    <hr style="color: black; size: 3px;">
+    <!--카테고리-->
+    <table class="table" style="text-align: center;">
+      <td>
+        <div>
+          <div class="icon-box">
+            <h4>최신 클럽<br>
+              <a href="{% url 'main:board_list'%}?so=recent" style="display: block;">
+                <img src="{% static 'img/pet.png' %}"></a>
+            </h4>
+            <p></p>
+            <p>모여모여!<br>가장 최신 클럽을 가입해 보세요</p>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div>
+          <div class="icon-box">
+            <h4>인기 클럽<br>
+              <a href="{% url 'main:board_list'%}?so=popular" style="display: block;">
+                <img src="{% static 'img/pet.png' %}"></a>
+            </h4>
+            <p></p>
+            <p>인기폭발!<br>가장 인기있는 클럽에 가입해 보세요</p>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div>
+          <div class="icon-box">
+            <h4>추천 클럽<br>
+              <a href="{% url 'main:board_list'%}?so=recommend" style="display: block;">
+                <img src="{% static 'img/pet.png' %}"></a>
+            </h4>
+            <p></p>
+            <p>강력추천!<br>다모아가 추천하는 클럽에 가입해 보세요</p>
+          </div>
+        </div>
+      </td>
+    </table>
+  {% endblock %}
+
+  {% block script %}
+    <script>
+      $(document).ready(function () {
+        $(".delete").on('click', function () {
+          if (confirm("정말로 삭제하시겠습니까?")) {
+            location.href = $(this).data('uri');
+          }
         });
-      </script>
-    {% endblock %}
+      });
+    </script>
+  {% endblock %}
