@@ -85,14 +85,21 @@
       <!-- 이전 페이지 -->
       {% if board_list.has_previous %}
         <li class="page-item">
-          <a class="page-link" data-page="{{ board_list.previous_page_number }}" href="javascript:void(0)">
-            <i class="fa-solid fa-backward"></i>
-          </a>
-        </li>
+      <a class="page-link" href="#" data-page="1">
+        <i class="fa-solid fa-backward-fast"></i>
+      </a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#" data-page="{{ board_list.previous_page_number }}">
+      <!-- 페이지 번호가 들어감 -->
+        <i class="fa-solid fa-caret-left"></i>
+        <!-- 이전이라는 글씨 대신에 아이콘을 넣음 -->
+      </a>
+    </li>
       {% else %}
         <li class="page-item disabled">
           <a class="page-link" tabindex="-1" aria-disabled="true" href="#">
-            <i class="fa-solid fa-backward"></i>
+            <i class="fa-solid fa-caret-left"></i>
           </a>
         </li>
       {% endif %}
@@ -103,13 +110,13 @@
         {% if page_number >= board_list.number|add:-3 and page_number <= board_list.number|add:3 %}
           {% if page_number == board_list.number %}
             <li class="page-item active" aria-current="page">
-              <a class="page-link" data-page="{{ page_number }}" href="javascript:void(0)">
+              <a class="page-link" data-page="{{ page_number }}">
                 {{ page_number }}
               </a>
             </li>
           {% else %}
             <li class="" page-item="page-item">
-              <a class="page-link" data-page="{{ page_number }}" href="javascript:void(0)">
+              <a class="page-link" data-page="{{ page_number }}">
                 {{ page_number }}
               </a>
             </li>
@@ -120,14 +127,20 @@
       <!-- 다음 페이지 -->
       {% if board_list.has_next %}
         <li class="page-item">
-          <a class="page-link" data-page="{{ board_list.next_page_number }}" href="javascript:void(0)">
-            <i class="fa-solid fa-forward"></i>
-          </a>
-        </li>
+      <a class="page-link" href="#" data-page="{{ board_list.next_page_number }}">
+        <i class="fa-solid fa-caret-right"></i>
+        <!-- 다음이라는 글씨 대신에 아이콘을 넣음 -->
+      </a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="#" data-page="{{ board_list.paginator.num_pages }}">
+        <i class="fa-solid fa-forward-fast"></i>
+      </a>
+    </li>
       {% else %}
         <li class="page-item disabled">
           <a class="page-link" tabindex="-1" aria-disabled="true" href="#">
-            <i class="fa-solid fa-forward"></i>
+            <i class="fa-solid fa-caret-right"></i>
           </a>
         </li>
       {% endif %}
