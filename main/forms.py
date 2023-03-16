@@ -4,12 +4,11 @@ from main.models import Board, Club, Reply
 class BoardForm(forms.ModelForm):
     class Meta:
         model = Board
-        fields = ['club','subject','content','event_date']
+        fields = ['club','subject','content']
         labels={
             'club':'클럽',
             'subject':'제목',
             'content':'내용',
-            'event_date':'모임일',
         }
         
 class ClubForm(forms.ModelForm):
