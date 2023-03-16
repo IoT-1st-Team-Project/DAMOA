@@ -114,7 +114,7 @@ def board_create(request):
     게시글 등록
     '''
     if request.method=='POST':
-        form=BoardForm(request.POST)
+        form=BoardForm(request.user, request.POST)
         if form.is_valid():
             board=form.save(commit=False)
             board.author=request.user
@@ -122,7 +122,7 @@ def board_create(request):
             board.save()
             return redirect('main:board_list')
     else:
-        form=BoardForm()
+        form=BoardForm(request.user)
             
     return render(request, 'main/board_form.html', {'form':form})
 
