@@ -12,8 +12,8 @@
   }
 
   .icon-box {
-    width: 400px;
-    height: 280px;
+    width: 350px;
+    height: 250px;
     box-shadow: 2px 2px 12px 2px black;
   }
 
@@ -34,6 +34,7 @@
 
 {% block content %}
   <div class="container">
+    <br>
     <h1>Damoa Club</h1>
 
     <table class="table">
@@ -41,23 +42,28 @@
       <tbody style="text-align: center;">
         <tr>
           <td>
-            <a class="club-link" href="{% url 'main:board_list'%}" style="display: block;">
-              <img src="{% static 'img/gallery/all.png' %}" style="width: 180px; height: auto;">
-              <br>전체글 보기</a>
+            <br>
+            <a href="{% url 'main:board_list'%}" style="display: block;">
+              <img src="{% static 'img/gallery/all.png' %}" style="width: 200px; height: auto;">
+              </a>
+              <br>전체글 보기
           </td>
           <td>
+            <br>
             <a href="{% url 'main:board_list'%}?kw=SP" style="display: block;">
               <img src="{% static 'img/gallery/sports.png' %}" style="width: 180px; height: auto;">
             </a>
             <br>스포츠
           </td>
           <td>
+            <br>
             <a href="{% url 'main:board_list'%}?kw=CK" style="display: block;">
               <img class="club" src="{% static 'img/gallery/cook.png' %}" style="width: 180px; height: auto;">
             </a>
             <br>요리
           </td>
           <td>
+            <br>
             <a href="{% url 'main:board_list'%}?kw=CT" style="display: block;">
               <img class="club" src="{% static 'img/gallery/culture.png' %}" style="width: 180px; height: auto;">
             </a>
@@ -66,24 +72,28 @@
         </tr>
         <tr>
           <td>
+            <br>
             <a href="{% url 'main:board_list'%}?kw=OD" style="display: block;">
               <img class="club" src="{% static 'img/gallery/outdoor.png' %}" style="width: 180px; height: auto;">
             </a>
             <br>아웃도어
           </td>
           <td>
+            <br>
             <a href="{% url 'main:board_list'%}?kw=LA" style="display: block;">
               <img class="club" src="{% static 'img/gallery/language.png' %}" style="width: 180px; height: auto;">
             </a>
             <br>언어
           </td>
           <td>
+            <br>
             <a href="{% url 'main:board_list'%}?kw=GA" style="display: block;">
               <img class="club" src="{% static 'img/gallery/game.png' %}" style="width: 180px; height: auto;">
             </a>
             <br>게임/오락
           </td>
           <td>
+            <br>
             <a href="{% url 'main:board_list'%}?kw=MU" style="display: block;">
               <img class="club" src="{% static 'img/gallery/music.png' %}" style="width: 180px; height: auto;">
             </a>
@@ -92,9 +102,12 @@
         </tr>
       </tbody>
     </table>
+    <hr>
+<br>
 
     <div style="overflow:scroll; height:400px;">
       <a href="{%url 'main:club_create' %}" class="btn btn-warning">클럽 만들기</a>
+      <p></p>
       <div class="container">
         <table class="table">
           <thead>
@@ -131,6 +144,7 @@
         </table>
       </div>
     </div>
+<br>
 
     <hr style="color: black; size: 3px;">
     <!--카테고리-->
@@ -138,36 +152,38 @@
       <td>
         <div>
           <div class="icon-box">
-            <h4>최신 클럽<br>
+            <br><h4>최신 클럽<br><br>
               <a href="{% url 'main:board_list'%}?so=recent" style="display: block;">
-                <img src="{% static 'img/pet.png' %}"></a>
+                <img src="{% static 'img/new.png' %}" style="width: 210px; height: auto;"></a>
             </h4>
             <p></p>
-            <p>모여모여!<br>가장 최신 클럽을 가입해 보세요</p>
+            <br>
+            <p>모여모여!<br>가장 최신 클럽에 가입해 보세요</p>
           </div>
         </div>
       </td>
       <td>
         <div>
           <div class="icon-box">
-            <h4>인기 클럽<br>
+            <br><h4>인기 클럽<br><br>
               <a href="{% url 'main:board_list'%}?so=popular" style="display: block;">
-                <img src="{% static 'img/pet.png' %}"></a>
+                <img src="{% static 'img/heart.png' %}" style="width: 215px; height: auto;"></a>
             </h4>
             <p></p>
-            <p>인기폭발!<br>가장 인기있는 클럽에 가입해 보세요</p>
+            <br>
+            <p>인기폭발!<br>지금 가장 핫한 클럽에 가입해 보세요</p>
           </div>
         </div>
       </td>
       <td>
         <div>
           <div class="icon-box">
-            <h4>추천 클럽<br>
+            <br><h4>추천 클럽<br><br>
               <a href="{% url 'main:board_list'%}?so=recommend" style="display: block;">
-                <img src="{% static 'img/pet.png' %}"></a>
+                <img src="{% static 'img/star.png' %}" style="width: 200px; height: auto;"></a>
             </h4>
             <p></p>
-            <p>강력추천!<br>다모아가 추천하는 클럽에 가입해 보세요</p>
+            <p>강력추천!<br>DAMOA가 추천하는 클럽에 가입해 보세요</p>
           </div>
         </div>
       </td>
