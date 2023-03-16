@@ -5,11 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from .forms import BoardForm, ClubForm, ReplyForm
 from django.contrib import messages
-<<<<<<< HEAD
-from django.db.models import Q
-=======
 from django.db.models import Q, Count
->>>>>>> 8630aaa59369d0a0c1873e353abc8371af219c33
 
 def index(request):
     """
@@ -65,9 +61,6 @@ def board_list(request):
     # 입력 인자
     page = request.GET.get('page', '1')  # 페이지
     kw = request.GET.get('kw', '')  # 검색어
-<<<<<<< HEAD
-    board_list = Board.objects.order_by('-create_date')
-=======
     so = request.GET.get('so', 'recent') # 정렬 기준 / default 최신순
 
     if so == 'recent':
@@ -83,26 +76,18 @@ def board_list(request):
     else : # 위 경우 제외 board_id 역순정렬
         board_list = Board.objects.order_by('-id')
 
->>>>>>> 8630aaa59369d0a0c1873e353abc8371af219c33
     if kw:
         board_list = board_list.filter(
             Q(subject__icontains=kw) |  # 제목 검색
             Q(content__icontains=kw) |  # 내용 검색
             Q(author__name__icontains=kw) |  # 작성자 검색
-<<<<<<< HEAD
-            Q(club__category__icontains=kw)       # 클럽 검색
-=======
-            Q(club__name__icontains=kw)       # 클럽 검색
->>>>>>> 8630aaa59369d0a0c1873e353abc8371af219c33
+            Q(club__name__icontains=kw) |       # 클럽 검색
+            Q(club__category__icontains=kw)
         ).distinct()
 
     paginator = Paginator(board_list, 10)  # 페이지당 10개 
     page_obj = paginator.get_page(page)
-<<<<<<< HEAD
-    context = {'board_list':page_obj, 'page':page, 'kw':kw}
-=======
     context = {'board_list':page_obj, 'page':page, 'kw':kw, 'so':so}
->>>>>>> 8630aaa59369d0a0c1873e353abc8371af219c33
 
     return render(request, 'main/board_list.html', context)
 
