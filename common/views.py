@@ -5,7 +5,8 @@ from django.contrib.auth.decorators import login_required
 from .forms import CustomUserForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash, logout
-from django.contrib import messages
+from django.contrib import messages, auth
+from django.contrib.auth.hashers import check_password
 
 
 def signup(request):
@@ -25,18 +26,23 @@ def signup(request):
         form = CustomUserForm()
     return render(request, 'common/signup.html', {'form': form})
 
-@login_required(login_url='common:login')
+@login_required(login_url = 'common:login')
 def change_password(request):
   if request.method == "POST":
-    form = PasswordChangeForm(request.user, request.POST)
-    if form.is_valid():
-      user = form.save()
-      update_session_auth_hash(request, user)
-      logout(request) # 변경 성공시 로그아웃
-      messages.success(request, '비밀번호가 변경되었습니다. 다시 로그인 해주세요')
-      return redirect('common:login')
+    user = request.user
+    origin_password = request.POST["origin_password"]
+    if check_password(origin_password, user.password):
+      new_password = request.POST["new_password"]
+      confirm_password = request.POST["confirm_password"]
+      if new_password == confirm_password:
+        user.set_password(new_password)
+        user.save()
+        logout(request) # 변경 성공시 로그아웃
+        return redirect('common:login')
+      else:
+        messages.error(request, '변경할 비밀번호를 다시 확인해주세요.')
     else:
-      messages.error(request, '비밀번호 변경에 실패하였습니다.')
+      messages.error(request, '기존 비밀번호가 일치하지 않습니다.')
+    return render(request, 'common/change_password.html')
   else:
-    form = PasswordChangeForm(request.user)
-  return render(request, 'common/change_password.html',{'form':form})
+    return render(request, 'common/change_password.html')
