@@ -11,7 +11,7 @@ class BoardForm(forms.ModelForm):
         widgets = {
             'subject': forms.TextInput(attrs={'placeholder': '제목을 입력하세요.'}),
             'content': forms.Textarea(attrs={'placeholder': '내용을 입력하세요.'}),
-            # 'event_date': DatePickerInput(format='%Y-%m-%d'),
+            'event_date': forms.DateTimeInput(attrs={'placeholder': '2023-03-16 14:03 형식'},format='%Y-%m-%d'),
         }
     
    
