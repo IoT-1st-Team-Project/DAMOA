@@ -97,12 +97,16 @@ def board_list(request):
         board_list = Board.objects.order_by('-id')
 
     if kw:
+        kw = kw.replace('년','')
+        kw = kw.replace('월','')
+        kw = kw.replace('일','')
         board_list = board_list.filter(
             Q(subject__icontains=kw) |  # 제목 검색
             Q(content__icontains=kw) |  # 내용 검색
             Q(author__name__icontains=kw) |  # 작성자 검색
             Q(club__name__icontains=kw) |    # 클럽 이름 검색
-            Q(club__category__icontains=kw)  # 클럽 카테고리 검색
+            Q(club__category__icontains=kw) |  # 클럽 카테고리 검색
+            Q(event_date__icontains=kw)      # 모임일 검색
         ).distinct()
 
     paginator = Paginator(board_list, 10)  # 페이지당 10개 
@@ -118,17 +122,17 @@ def board_create(request):
     '''
     게시글 등록
     '''
-    user=request.user
+
     if request.method=='POST':
-        form=BoardForm(user, request.POST)
+        form=BoardForm(request.POST, user=request.user)
         if form.is_valid():
             board=form.save(commit=False)
-            board.author=user
+            board.author=request.user
             board.create_date = timezone.now()
             board.save()
             return redirect('main:board_list')
     else:
-        form=BoardForm()
+        form=BoardForm(user=request.user)
             
     return render(request, 'main/board_form.html', {'form':form})
 

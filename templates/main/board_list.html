@@ -87,17 +87,17 @@
       <!-- 이전 페이지 -->
       {% if board_list.has_previous %}
         <li class="page-item">
-      <a class="page-link" href="#" data-page="1">
-        <i class="fa-solid fa-backward-fast"></i>
-      </a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" href="#" data-page="{{ board_list.previous_page_number }}">
-      <!-- 페이지 번호가 들어감 -->
-        <i class="fa-solid fa-caret-left"></i>
+          <a class="page-link" href="#" data-page="1">
+            <i class="fa-solid fa-backward-fast"></i>
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#" data-page="{{ board_list.previous_page_number }}">
+        <!-- 페이지 번호가 들어감 -->
+            <i class="fa-solid fa-caret-left"></i>
         <!-- 이전이라는 글씨 대신에 아이콘을 넣음 -->
-      </a>
-    </li>
+          </a>
+        </li>
       {% else %}
         <li class="page-item disabled">
           <a class="page-link" tabindex="-1" aria-disabled="true" href="#">
@@ -129,16 +129,16 @@
       <!-- 다음 페이지 -->
       {% if board_list.has_next %}
         <li class="page-item">
-      <a class="page-link" href="#" data-page="{{ board_list.next_page_number }}">
-        <i class="fa-solid fa-caret-right"></i>
-        <!-- 다음이라는 글씨 대신에 아이콘을 넣음 -->
-      </a>
-    </li>
-    <li class="page-item">
-      <a class="page-link" href="#" data-page="{{ board_list.paginator.num_pages }}">
-        <i class="fa-solid fa-forward-fast"></i>
-      </a>
-    </li>
+          <a class="page-link" href="#" data-page="{{ board_list.next_page_number }}">
+            <i class="fa-solid fa-caret-right"></i>
+            <!-- 다음이라는 글씨 대신에 아이콘을 넣음 -->
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#" data-page="{{ board_list.paginator.num_pages }}">
+            <i class="fa-solid fa-forward-fast"></i>
+          </a>
+        </li>
       {% else %}
         <li class="page-item disabled">
           <a class="page-link" tabindex="-1" aria-disabled="true" href="#">
@@ -147,11 +147,14 @@
         </li>
       {% endif %}
     </ul>
-
+    {% if user.author_club.all %}
     <a href="{%url 'main:board_create' %}" class="btn btn-warning">
       <i class="fa-solid fa-pen"></i>
       게시글 등록
     </a>
+    {% else %}
+      <a href="{%url 'main:club_create' %}" class="btn btn-warning">클럽을 만드시겠어요?</a>
+    {% endif %}
   </div>
   <!-- 검색기능을 위한 SearchForm -->
 
