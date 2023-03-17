@@ -6,6 +6,7 @@ from django.utils import timezone
 from .forms import BoardForm, ClubForm, ReplyForm
 from django.contrib import messages
 from django.db.models import Q, Count
+from datetime import datetime, timedelta
 
 def index(request):
     """
@@ -77,11 +78,12 @@ def board_list(request):
     '''
     board 출력
     '''
-    
     # 입력 인자
     page = request.GET.get('page', '1')  # 페이지
     kw = request.GET.get('kw', '')  # 검색어
     so = request.GET.get('so', 'recent') # 정렬 기준 / default 최신순
+    category = request.GET.get('category', '')
+    event_date = request.GET.get('event_date', '')
 
     if so == 'recent':
         board_list = Board.objects.order_by('-create_date')
@@ -97,21 +99,24 @@ def board_list(request):
         board_list = Board.objects.order_by('-id')
 
     if kw:
-        kw = kw.replace('년','')
-        kw = kw.replace('월','')
-        kw = kw.replace('일','')
         board_list = board_list.filter(
             Q(subject__icontains=kw) |  # 제목 검색
             Q(content__icontains=kw) |  # 내용 검색
-            Q(author__name__icontains=kw) |  # 작성자 검색
-            Q(club__name__icontains=kw) |    # 클럽 이름 검색
-            Q(club__category__icontains=kw) |  # 클럽 카테고리 검색
-            Q(event_date__icontains=kw)      # 모임일 검색
+            Q(author__name__exact=kw) |  # 작성자 검색
+            Q(club__name__icontains=kw)  # 클럽 이름 검색
         ).distinct()
+
+    if category :
+        board_list = board_list.filter(club__category=category)  # 클럽 카테고리 검색
+        
+    if event_date :
+        # 시간정보 자동추가하기
+        event_date = datetime.strptime(event_date, '%Y-%m-%d') - timedelta(seconds=1)
+        board_list = board_list.filter(event_date__range=[event_date, event_date+timedelta(days=1)])
 
     paginator = Paginator(board_list, 10)  # 페이지당 10개 
     page_obj = paginator.get_page(page)
-    context = {'board_list':page_obj, 'page':page, 'kw':kw, 'so':so}
+    context = {'board_list':page_obj, 'page':page, 'kw':kw, 'so':so, 'category':category, 'event_date':event_date}
 
     return render(request, 'main/board_list.html', context)
 
@@ -122,7 +127,6 @@ def board_create(request):
     '''
     게시글 등록
     '''
-
     if request.method=='POST':
         form=BoardForm(request.POST, user=request.user)
         if form.is_valid():
@@ -133,7 +137,6 @@ def board_create(request):
             return redirect('main:board_list')
     else:
         form=BoardForm(user=request.user)
-            
     return render(request, 'main/board_form.html', {'form':form})
 
 
@@ -157,7 +160,9 @@ def board_modify(request, board_id):
             return redirect('main:detail', board_id = board.id)
     else:
         form = BoardForm(instance=board)  # 기존 내용이 반영된 상태에서 수정 시작
-    context = {'form': form}
+        form.fields['club'].queryset = request.user.author_club.all()
+
+    context = {'board':board, 'form': form}
     return render(request, 'main/board_form.html', context)
 
 

@@ -38,12 +38,16 @@
 
     <!-- 검색부분 추가 -->
       <div class="row col-5 my-3">
+        <form method="GET" action="{% url 'main:board_list' %}">
           <div class="input-group">
-            <input type="text" id="search_kw" class="form-control kw" value="{{ kw|default_if_none:'' }}">
+            <input type="text" id="search_kw" name="kw" class="form-control kw" value="{{ kw|default_if_none:'' }}">
+            <input type="hidden" name="category" value="{{ category }}">
+            <input type="date" id="search_event_date" class="form-control" name="event_date" value="{{ event_date|default_if_none:'' }}">
             <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
+              <button class="btn btn-outline-secondary" type="submit" id="btn_search">찾기</button>
             </div>
           </div>
+        </form>
       </div>
   </div>
 
@@ -51,7 +55,7 @@
       <thead>
         <tr class="text-center thead-dark">
           <th>번호</th>
-          <th>클럽명</th>
+          <th>클럽</th>
           <th style="width:30%">제목</th>
           <th>작성자</th>
           <th>참석자 수</th>

@@ -50,21 +50,21 @@
           </td>
           <td>
             <br>
-            <a href="{% url 'main:board_list'%}?kw=SP" style="display: block;">
+            <a href="{% url 'main:board_list'%}?category=SP" style="display: block;">
               <img src="{% static 'img/gallery/sports.png' %}" style="width: 180px; height: auto;">
             </a>
             <br>스포츠
           </td>
           <td>
             <br>
-            <a href="{% url 'main:board_list'%}?kw=CK" style="display: block;">
+            <a href="{% url 'main:board_list'%}?category=CK" style="display: block;">
               <img class="club" src="{% static 'img/gallery/cook.png' %}" style="width: 180px; height: auto;">
             </a>
             <br>요리
           </td>
           <td>
             <br>
-            <a href="{% url 'main:board_list'%}?kw=CT" style="display: block;">
+            <a href="{% url 'main:board_list'%}?category=CT" style="display: block;">
               <img class="club" src="{% static 'img/gallery/culture.png' %}" style="width: 180px; height: auto;">
             </a>
             <br>문화
@@ -73,28 +73,28 @@
         <tr>
           <td>
             <br>
-            <a href="{% url 'main:board_list'%}?kw=OD" style="display: block;">
+            <a href="{% url 'main:board_list'%}?category=OD" style="display: block;">
               <img class="club" src="{% static 'img/gallery/outdoor.png' %}" style="width: 180px; height: auto;">
             </a>
             <br>아웃도어
           </td>
           <td>
             <br>
-            <a href="{% url 'main:board_list'%}?kw=LA" style="display: block;">
+            <a href="{% url 'main:board_list'%}?category=LA" style="display: block;">
               <img class="club" src="{% static 'img/gallery/language.png' %}" style="width: 180px; height: auto;">
             </a>
             <br>언어
           </td>
           <td>
             <br>
-            <a href="{% url 'main:board_list'%}?kw=GA" style="display: block;">
+            <a href="{% url 'main:board_list'%}?category=GA" style="display: block;">
               <img class="club" src="{% static 'img/gallery/game.png' %}" style="width: 180px; height: auto;">
             </a>
             <br>게임/오락
           </td>
           <td>
             <br>
-            <a href="{% url 'main:board_list'%}?kw=MU" style="display: block;">
+            <a href="{% url 'main:board_list'%}?category=MU" style="display: block;">
               <img class="club" src="{% static 'img/gallery/music.png' %}" style="width: 180px; height: auto;">
             </a>
             <br>음악/악기
@@ -122,7 +122,7 @@
             {% if club_list %}
               {% for club in club_list %}
                 <tr>
-                  <td>{{forloop.counter}}</td>
+                  <td>{{club.id}}</td>
                   <td>
                     <a href="{% url 'main:board_list'%}?kw={{ club.name }}">{{club.name}}</a>
                   </td>
