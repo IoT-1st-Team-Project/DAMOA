@@ -105,7 +105,7 @@
     <hr>
 <br>
 
-    <div style="overflow:scroll; height:400px;">
+    <div>
       <a href="{%url 'main:club_create' %}" class="btn btn-warning">클럽 만들기</a>
       <p></p>
       <div class="container">
@@ -130,7 +130,7 @@
                     {% if request.user == club.author %}
                       <a href="#" class="delete btn btn-sm btn-outline-secondary" data-uri="{% url 'main:club_delete' club.id %}">삭제</a>
                       {%else%}
-                      1
+                      
                     {% endif %}
                   </td>
                 </tr>
@@ -142,6 +142,74 @@
             {% endif %}
           </tbody>
         </table>
+
+        <!-- 페이징 처리 시작 -->
+        <ul class="pagination justify-content-center">
+          <!-- 이전 페이지 -->
+          {% if club_list.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?page=1" data-page="1">
+                <i class="fa-solid fa-backward-fast"></i>
+              </a>
+            </li>
+
+            <li class="page-item">
+              <a class="page-link" href="?page={{ club_list.previous_page_number }}">
+            <!-- 페이지 번호가 들어감 -->
+                <i class="fa-solid fa-caret-left"></i>
+            <!-- 이전이라는 글씨 대신에 아이콘을 넣음 -->
+              </a>
+            </li>
+          {% else %}
+            <li class="page-item disabled">
+              <a class="page-link" tabindex="-1" aria-disabled="true" href="#">
+                <i class="fa-solid fa-caret-left"></i>
+              </a>
+            </li>
+          {% endif %}
+
+          <!-- 페이지 리스트 -->
+          {% for page_number in club_list.paginator.page_range %}
+          <!-- 페이지 표시 제한 기능 Ctrl+Shift_P 하고 settins.json 들어가서 save 할때 false로 바꾸고 건드리기 -->
+          {% if page_number >= club_list.number|add:-3 and page_number <= club_list.number|add:3 %}
+            {% if page_number == club_list.number %}
+              <li class="page-item active" aria-current="page">
+                <a class="page-link" data-page="{{ page_number }}">
+                  {{ page_number }}
+                </a>
+              </li>
+            {% else %}
+              <li class="" page-item="page-item">
+                <a class="page-link" data-page="{{ page_number }}">
+                  {{ page_number }}
+                </a>
+              </li>
+            {% endif %}
+          {% endif %}
+          {% endfor %}
+
+          <!-- 다음 페이지 -->
+          {% if club_list.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ club_list.next_page_number }}">
+                <i class="fa-solid fa-caret-right"></i>
+                <!-- 다음이라는 글씨 대신에 아이콘을 넣음 -->
+              </a>
+            </li>
+
+            <li class="page-item">
+              <a class="page-link" href="?page={{ club_list.paginator.num_pages }}">
+                <i class="fa-solid fa-forward-fast"></i>
+              </a>
+            </li>
+          {% else %}
+            <li class="page-item disabled">
+              <a class="page-link" tabindex="-1" aria-disabled="true" href="#">
+                <i class="fa-solid fa-caret-right"></i>
+              </a>
+            </li>
+          {% endif %}
+        </ul>
       </div>
     </div>
 <br>
@@ -198,6 +266,13 @@
             location.href = $(this).data('uri');
           }
         });
+      });
+
+      $(document).ready(function() {
+        $(".page-link").on("click", function() {
+          var page = $(this).data("page");
+          window.location.href = "?page=" + page;
+         });
       });
     </script>
   {% endblock %}

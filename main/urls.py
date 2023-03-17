@@ -24,5 +24,4 @@ urlpatterns = [
     path('main/delete/<int:club_id>/', views.club_delete, name='club_delete'),
 
     path('summernote/', include('django_summernote.urls')),
- 
 ]

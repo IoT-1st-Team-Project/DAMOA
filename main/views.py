@@ -19,7 +19,12 @@ def main(request):
     메인 화면 출력
     """
     club_list=Club.objects.order_by('-id')
-    context={'club_list':club_list}
+
+    page = request.GET.get('page', '1')  # 페이지
+    paginator = Paginator(club_list, 6)  # 페이지당 6개
+    page_obj = paginator.get_page(page)
+
+    context={'club_list':page_obj, 'page':page}
     return render(request, 'main/main.html', context)
 
 
